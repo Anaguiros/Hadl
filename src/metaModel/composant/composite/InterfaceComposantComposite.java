@@ -1,4 +1,4 @@
-package metaModel.composant;
+package metaModel.composant.composite;
 
 import metaModel.core.Interface;
 

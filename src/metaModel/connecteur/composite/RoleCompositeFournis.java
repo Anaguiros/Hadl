@@ -1,4 +1,4 @@
-package metaModel.connecteur;
+package metaModel.connecteur.composite;
 
 public class RoleCompositeFournis extends RoleComposite {
 

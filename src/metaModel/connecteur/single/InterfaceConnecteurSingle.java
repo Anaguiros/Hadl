@@ -1,4 +1,4 @@
-package metaModel.connecteur;
+package metaModel.connecteur.single;
 
 import metaModel.core.Interface;
 
