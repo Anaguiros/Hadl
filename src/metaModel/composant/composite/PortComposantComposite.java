@@ -1,6 +1,5 @@
 package metaModel.composant.composite;
 
-public abstract class PortComposantComposite extends
-		InterfaceComposantComposite {
+public abstract class PortComposantComposite extends InterfaceComposantComposite {
 
 }
