@@ -8,7 +8,8 @@ public class ServiceCompositeRequis extends ServiceComposite {
 	//Aggrégation de ports
 	List<PortComposantCompositeRequis> listPort;
 	
-	public ServiceCompositeRequis(){
+	public ServiceCompositeRequis(String name){
+		this.name = name;
 		this.listPort = new ArrayList<PortComposantCompositeRequis>();
 	}
 	

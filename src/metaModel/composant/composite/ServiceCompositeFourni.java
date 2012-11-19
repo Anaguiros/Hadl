@@ -8,7 +8,8 @@ public class ServiceCompositeFourni extends ServiceComposite {
 	//Aggrégation de ports
 	List<PortComposantCompositeFourni> listPort;
 		
-	public ServiceCompositeFourni(){
+	public ServiceCompositeFourni(String name){
+		this.name = name;
 		this.listPort = new ArrayList<PortComposantCompositeFourni>();
 	}
 	
