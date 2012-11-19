@@ -1,9 +1,14 @@
 package model.core;
 
-public class BindConnexionServeur {
+import metaModel.composant.composite.PortComposantCompositeRequis;
+import metaModel.configuration.PortConfigRequis;
+import metaModel.core.BindingRequis;
 
-	public BindConnexionServeur() {
-		// TODO Auto-generated constructor stub
+public class BindConnexionServeur extends BindingRequis{
+
+	public BindConnexionServeur(PortConfigRequis portConfig,
+			PortComposantCompositeRequis portCompo) {
+		super(portConfig, portCompo);
 	}
 
 }
