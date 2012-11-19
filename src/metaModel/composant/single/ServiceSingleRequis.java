@@ -1,12 +1,11 @@
 package metaModel.composant.single;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ServiceSingleRequis extends ServiceSingle {
 
 	//Aggrégation de ports
-	List<PortComposantSingleRequis> listPorts;
+	private ArrayList<PortComposantSingleRequis> listPorts;
 	
 	public ServiceSingleRequis(String name) {
 		this.name = name;
