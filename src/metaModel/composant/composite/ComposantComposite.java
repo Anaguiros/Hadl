@@ -7,6 +7,24 @@ import metaModel.composant.Composant;
 public class ComposantComposite extends Composant {
 
 	//Composition d'interfaces
-	List<InterfaceComposantComposite> listInterface;
+	protected List<InterfaceComposantComposite> listInterface;
+	
+	public ComposantComposite(String name){
+		this.name = name;
+	}
+	
+	public void addInterface(String name){
+		
+	}
+	
+	public InterfaceComposantComposite getInterface(){
+		
+		return null;
+		
+	}
+	
+	public void removeInterface(){
+		
+	}
 	
 }

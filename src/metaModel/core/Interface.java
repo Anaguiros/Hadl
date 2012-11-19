@@ -14,5 +14,6 @@ public abstract class Interface {
 	
 	protected Type type;
 	protected Synchronisation synchronisation;
+	protected String name;
 	
 }
