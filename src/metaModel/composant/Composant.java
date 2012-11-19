@@ -15,17 +15,14 @@ public abstract class Composant extends Element {
 	 * @param value
 	 */
 	public void addProprieteFonctionnelle(String name, Object value){
-		
-		
+
 		for(int i=0;i<listPropriete.size();i++){
 			if(listPropriete.get(i).getName().equalsIgnoreCase(name)){
 				listPropriete.get(i).setValue(value);
 				return ;
 			}
 		}
-		
 		listPropriete.add(new Fonctionnelle(name,value));
-		
 	}
 	
 	/**
@@ -41,7 +38,6 @@ public abstract class Composant extends Element {
 				return ;
 			}
 		}
-		
 		listPropriete.add(new NonFonctionnelle(name,value));
 	}
 	
