@@ -1,11 +1,11 @@
 package metaModel.core;
 
 import metaModel.composant.composite.PortComposantCompositeRequis;
-import metaModel.connecteur.composite.RoleCompositeFournis;
+import metaModel.connecteur.composite.RoleCompositeFourni;
 
 public class AttachmentRequis {
 
 	PortComposantCompositeRequis portCompo;
-	RoleCompositeFournis role;
+	RoleCompositeFourni role;
 	
 }

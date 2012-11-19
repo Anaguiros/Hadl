@@ -3,16 +3,16 @@ package metaModel.composant.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceCompositeFournis extends ServiceComposite {
+public class ServiceCompositeFourni extends ServiceComposite {
 
 	//Aggrégation de ports
-	List<PortComposantCompositeFournis> listPort;
-	
-	public ServiceCompositeFournis(){
-		this.listPort = new ArrayList<PortComposantCompositeFournis>();
+	List<PortComposantCompositeFourni> listPort;
+		
+	public ServiceCompositeFourni(){
+		this.listPort = new ArrayList<PortComposantCompositeFourni>();
 	}
 	
-	public void addPort(String name, PortComposantCompositeFournis port){
+	public void addPort(String name, PortComposantCompositeFourni port){
 		for(int i=0;i<listPort.size();i++){
 			if(listPort.get(i).getName().equalsIgnoreCase(name)){
 				listPort.add(i, port);
@@ -20,10 +20,10 @@ public class ServiceCompositeFournis extends ServiceComposite {
 			}
 		}
 		
-		listPort.add(new PortComposantCompositeFournis(name));
+		listPort.add(new PortComposantCompositeFourni(name));
 	}
 	
-	public PortComposantCompositeFournis getPort(String name){
+	public PortComposantCompositeFourni getPort(String name){
 		for(int i=0;i<listPort.size();i++){
 			if(listPort.get(i).getName().equalsIgnoreCase(name)){
 				return listPort.get(i);
@@ -39,5 +39,4 @@ public class ServiceCompositeFournis extends ServiceComposite {
 			}
 		}
 	}
-	
 }
