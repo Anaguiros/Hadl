@@ -1,16 +1,14 @@
 package model.core;
 
-import model.serveur.ConnexionComposantServeur;
-import model.serveur.PortReceptionServeur;
+import metaModel.composant.composite.PortComposantCompositeRequis;
+import metaModel.configuration.PortConfigRequis;
+import metaModel.core.BindingRequis;
 
-public class BindConnexionServeur {
+public class BindConnexionServeur extends BindingRequis{
 
-	private ConnexionComposantServeur connexionComposant;
-	private PortReceptionServeur portReception;
-	
-	public BindConnexionServeur(ConnexionComposantServeur connexionComposant, PortReceptionServeur portReception) {
-		this.connexionComposant = connexionComposant;
-		this.portReception = portReception;
+	public BindConnexionServeur(PortConfigRequis portConfig,
+			PortComposantCompositeRequis portCompo) {
+		super(portConfig, portCompo);
 	}
 
 }
