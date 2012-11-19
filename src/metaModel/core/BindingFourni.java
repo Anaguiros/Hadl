@@ -8,4 +8,17 @@ public class BindingFourni {
 	PortConfigFourni portConfig;
 	PortComposantCompositeFourni portCompo;
 	
+	public BindingFourni(PortConfigFourni portConfig, PortComposantCompositeFourni portCompo){
+		this.portConfig = portConfig;
+		this.portCompo = portCompo;
+	}
+
+	public PortConfigFourni getPortConfig() {
+		return portConfig;
+	}
+
+	public PortComposantCompositeFourni getPortCompo() {
+		return portCompo;
+	}
+
 }
