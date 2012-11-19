@@ -8,5 +8,11 @@ public class ConnecteurSingle extends Connecteur {
 
 	//Composition d'interfaces
 	List<InterfaceConnecteurSingle> listInterface;
+
+	@Override
+	protected void glue() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
