@@ -1,8 +1,8 @@
 package model.core;
 
-public class BindConnexionServer {
+public class BindConnexionServeur {
 
-	public BindConnexionServer() {
+	public BindConnexionServeur() {
 		// TODO Auto-generated constructor stub
 	}
 

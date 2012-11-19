@@ -1,4 +1,4 @@
-package model.server.securityManager;
+package model.serveur.securityManager;
 
 public class SecurityManager {
 

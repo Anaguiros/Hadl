@@ -1,4 +1,4 @@
-package model.server.connectionManager;
+package model.serveur.connectionManager;
 
 public class ConnectionManager {
 

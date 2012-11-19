@@ -1,4 +1,4 @@
-package model.server.database;
+package model.serveur.database;
 
 public class Database {
 
