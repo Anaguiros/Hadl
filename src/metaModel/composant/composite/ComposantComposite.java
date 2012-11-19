@@ -1,8 +1,10 @@
 package metaModel.composant.composite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import metaModel.composant.Composant;
+import metaModel.composant.Propriete;
 
 public class ComposantComposite extends Composant {
 
@@ -11,6 +13,8 @@ public class ComposantComposite extends Composant {
 	
 	public ComposantComposite(String name){
 		this.name = name;
+		this.listInterface = new ArrayList<InterfaceComposantComposite>();
+		this.listPropriete = new ArrayList<Propriete>();
 	}
 	
 	public void addInterface(String name, InterfaceComposantComposite interf){
