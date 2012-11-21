@@ -1,9 +1,13 @@
 package model.serveur.securityManager;
 
-public class SecurityManager {
+import metaModel.composant.composite.ComposantComposite;
 
-	public SecurityManager() {
+public class SecurityManager extends ComposantComposite {
+
+	public SecurityManager(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
+
 
 }
