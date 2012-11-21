@@ -19,7 +19,7 @@ public class ServeurConfiguration extends Configuration {
 		
 		this.addElement("ConnexionManager", new ConnexionManager("ConnexionManager"));
 //		this.addElement("SecurityManager", element);
-//		this.addElement("Database", element);
+		this.addElement("Database", new Database("Database"));
 		
 		this.addInterface("PortConnexionServeur", new PortConnexionServer("PortConnexionServeur"));
 		this.addInterface("ConnexionComposantServeur", new ConnexionComposantServeur("ConnexionComposantServeur"));

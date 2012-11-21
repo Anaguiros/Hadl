@@ -1,6 +1,5 @@
 package impl;
 
-import metaModel.composant.composite.PortComposantCompositeFourni;
 import metaModel.composant.composite.PortComposantCompositeRequis;
 import metaModel.composant.composite.ServiceCompositeFourni;
 import metaModel.composant.composite.ServiceCompositeRequis;
