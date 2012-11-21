@@ -12,6 +12,8 @@ public class ConnecteurSingle extends Connecteur {
 	public ConnecteurSingle(String name) {
 		this.name = name;
 		this.listInterfaces = new ArrayList<InterfaceConnecteurSingle>();
+		
+		System.out.println("Connector Single Creation : "+name);
 	}
 	
 	public void addInterfaceConnecteurSingle(InterfaceConnecteurSingle ics) {

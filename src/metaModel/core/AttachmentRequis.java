@@ -11,6 +11,8 @@ public class AttachmentRequis {
 	public  AttachmentRequis(PortComposantCompositeRequis portCompo, RoleCompositeFourni role){
 		this.portCompo = portCompo;
 		this.role = role;
+		
+		System.out.println("Attachment Required Creation : "+portCompo.getName()+" & "+role.getName());
 	}
 
 	public PortComposantCompositeRequis getPortCompo() {

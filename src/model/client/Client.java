@@ -9,8 +9,8 @@ public class Client extends ComposantComposite{
 		this.addProprieteFonctionnelle("Code Source", null);
 		this.addProprieteNonFonctionnelle("Performance Data", null);
 		
-		this.addInterface("ServiceReceptionClient", new ServiceReceptionClient("Service Reception Client"));
-		this.addInterface("ServiceEnvoiClient", new ServiceEnvoiClient("Service Envoi Client"));
+		this.addInterface("ServiceReceptionClient", new ServiceReceptionClient("ServiceReceptionClient"));
+		this.addInterface("ServiceEnvoiClient", new ServiceEnvoiClient("ServiceEnvoiClient"));
 	}
 
 }

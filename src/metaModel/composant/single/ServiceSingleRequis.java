@@ -10,6 +10,8 @@ public class ServiceSingleRequis extends ServiceSingle {
 	public ServiceSingleRequis(String name) {
 		this.name = name;
 		this.listPorts = new ArrayList<PortComposantSingleRequis>();
+		
+		System.out.println("Service Component Single Required Creation : "+name);
 	}
 	
 	public void addPortComposantSingleFourni(PortComposantSingleRequis port) {

@@ -10,7 +10,8 @@ public class ServiceEnvoiServeur extends ServiceCompositeFourni {
 	public ServiceEnvoiServeur(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
-		this.addPort(name, new PortEnvoiServeur(name));
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortEnvoiServeur(portName));
 	}
 
 	

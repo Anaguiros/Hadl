@@ -11,9 +11,10 @@ public class ServeurComposant extends ComposantComposite {
 
 	public ServeurComposant(String name) {
 		super(name);
-		this.addInterface("ServiceEnvoiServeur", new ServiceEnvoiServeur("Service Envoi Serveur"));
-		this.addInterface("ServiceReceptionServeur", new ServiceEnvoiServeur("Service Reception Serveur"));
-		this.addInterface("ServiceConnexionConfigServeur", new ServiceEnvoiServeur("Service Connexion ConfigServeur"));
+		
+		this.addInterface("ServiceEnvoiServeur", new ServiceEnvoiServeur("ServiceEnvoiServeur"));
+		this.addInterface("ServiceReceptionServeur", new ServiceReceptionServeur("ServiceReceptionServeur"));
+		this.addInterface("ServiceConnexionConfigServeur", new ServiceConnexionConfigServeur("ServiceConnexionConfigServeur"));
 	}
 
 }

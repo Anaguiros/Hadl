@@ -11,6 +11,8 @@ public class BindingRequis {
 	public BindingRequis(PortConfigRequis portConfig, PortComposantCompositeRequis portCompo){
 		this.portConfig = portConfig;
 		this.portCompo = portCompo;
+		
+		System.out.println("Binding Required Creation : "+portCompo.getName()+" & "+portConfig.getName());
 	}
 
 	public PortConfigRequis getPortConfig() {

@@ -15,6 +15,8 @@ public class ComposantComposite extends Composant {
 		this.name = name;
 		this.listInterface = new ArrayList<InterfaceComposantComposite>();
 		this.listPropriete = new ArrayList<Propriete>();
+		
+		System.out.println("Component Creation Composite : "+name);
 	}
 	
 	public void addInterface(String name, InterfaceComposantComposite interf){
@@ -27,7 +29,7 @@ public class ComposantComposite extends Composant {
 		listInterface.add(interf);
 	}
 	
-	public InterfaceComposantComposite getInterface(){
+	public InterfaceComposantComposite getInterface(String name){
 		for(int i=0;i<listInterface.size();i++){
 			if(listInterface.get(i).getName().equalsIgnoreCase(name)){
 				return listInterface.get(i);
