@@ -2,11 +2,14 @@ package impl;
 
 import metaModel.composant.composite.PortComposantCompositeFourni;
 import metaModel.composant.composite.PortComposantCompositeRequis;
+import metaModel.composant.composite.ServiceCompositeFourni;
+import metaModel.composant.composite.ServiceCompositeRequis;
 import metaModel.connecteur.composite.RoleCompositeFourni;
 import metaModel.connecteur.composite.RoleCompositeRequis;
 import model.client.Client;
 import model.connecteur.RPC;
 import model.core.EnvoiClient;
+import model.core.ReceptionClient;
 import model.serveur.ServeurComposant;
 
 public class Application {
@@ -17,7 +20,7 @@ public class Application {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("\n##### Client Creation #####");
+		System.out.println("##### Client Creation #####");
 		Client client = new Client("monClient");
 		
 		System.out.println("\n##### Server Creation #####");
@@ -27,9 +30,15 @@ public class Application {
 		RPC rpc = new RPC("monRPC");
 		
 		System.out.println("\n##### Attachment Creation #####");
-		PortComposantCompositeFourni port = (PortComposantCompositeFourni)client.getInterface("PortEnvoiClient");
-		RoleCompositeRequis role = (RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient");
-		EnvoiClient envoieClient = new EnvoiClient(port, role);
+		
+		PortComposantCompositeFourni pFour = ((ServiceCompositeFourni)client.getInterface("ServiceEnvoiClient")).getPort("PortEnvoiClient");
+		RoleCompositeRequis rReq = (RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient");
+		EnvoiClient envoieClient = new EnvoiClient(pFour, rReq);
+				
+		PortComposantCompositeRequis pReq = ((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient");
+		RoleCompositeFourni rFour = (RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient");
+		
+		ReceptionClient receptionClient = new ReceptionClient(pReq, rFour);
 	}
 
 }
