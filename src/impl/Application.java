@@ -6,10 +6,12 @@ import metaModel.composant.composite.ServiceCompositeFourni;
 import metaModel.composant.composite.ServiceCompositeRequis;
 import metaModel.connecteur.composite.RoleCompositeFourni;
 import metaModel.connecteur.composite.RoleCompositeRequis;
+import model.attachments.EnvoiClient;
+import model.attachments.EnvoiServeur;
+import model.attachments.ReceptionClient;
+import model.attachments.ReceptionServeur;
 import model.client.Client;
 import model.connecteur.RPC;
-import model.core.EnvoiClient;
-import model.core.ReceptionClient;
 import model.serveur.ServeurComposant;
 
 public class Application {
@@ -31,14 +33,20 @@ public class Application {
 		
 		System.out.println("\n##### Attachment Creation #####");
 		
-		PortComposantCompositeFourni pFour = ((ServiceCompositeFourni)client.getInterface("ServiceEnvoiClient")).getPort("PortEnvoiClient");
-		RoleCompositeRequis rReq = (RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient");
-		EnvoiClient envoieClient = new EnvoiClient(pFour, rReq);
-				
-		PortComposantCompositeRequis pReq = ((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient");
-		RoleCompositeFourni rFour = (RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient");
+		EnvoiClient envoiClient = new EnvoiClient(((ServiceCompositeFourni)client.getInterface("ServiceEnvoiClient")).getPort("PortEnvoiClient"), 
+				(RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"));
 		
-		ReceptionClient receptionClient = new ReceptionClient(pReq, rFour);
+		ReceptionClient receptionClient = new ReceptionClient(((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient"),
+				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient"));
+		
+//		PortComposantCompositeFourni pFour = ((ServiceCompositeFourni)serveurCompo.getInterface("ServiceEnvoiServeur")).getPort("PortEnvoiServeur");
+//		RoleCompositeRequis rReq = (RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiServeur");
+		
+		EnvoiServeur envoiServeur = new EnvoiServeur(((ServiceCompositeFourni)serveurCompo.getInterface("ServiceEnvoiServeur")).getPort("PortEnvoiServeur"), 
+				(RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiServeur"));
+		
+		ReceptionServeur receptionServeur = new ReceptionServeur(((ServiceCompositeRequis)serveurCompo.getInterface("ServiceReceptionServeur")).getPort("PortReceptionServeur"), 
+				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionServeur"));
 	}
 
 }

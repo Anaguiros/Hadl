@@ -1,4 +1,4 @@
-package model.core;
+package model.attachments;
 
 import metaModel.composant.composite.PortComposantCompositeFourni;
 import metaModel.connecteur.composite.RoleCompositeRequis;
