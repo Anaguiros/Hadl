@@ -1,5 +1,6 @@
 package impl;
 
+import metaModel.composant.composite.ComposantComposite;
 import metaModel.composant.composite.PortComposantCompositeRequis;
 import metaModel.composant.composite.ServiceCompositeFourni;
 import metaModel.composant.composite.ServiceCompositeRequis;
@@ -16,7 +17,13 @@ import model.core.BindConnexionServeur;
 import model.core.BindServeur;
 import model.serveur.ServeurComposant;
 import model.serveur.ServeurConfiguration;
+import model.serveur.attachments.ResultAuth;
+import model.serveur.connector.clearanceRequest.ClearanceRequest;
+import model.serveur.connector.securityQuery.SecurityQuery;
+import model.serveur.connector.sqlQuery.SQLQuery;
 import model.serveur.connexionManager.ConnexionManager;
+import model.serveur.database.Database;
+import model.serveur.securityManager.SecurityManager;
 
 public class Application {
 
@@ -37,6 +44,17 @@ public class Application {
 		
 		System.out.println("\n##### RPC Creation #####");
 		RPC rpc = new RPC("monRPC");
+		
+		System.out.println("\n##### Intern Connectors Creation #####");
+		ClearanceRequest clearanceRequest = new ClearanceRequest("ClearanceRequest");
+		SQLQuery slqQuery = new SQLQuery("SQLQuery");
+		SecurityQuery securityQuery = new SecurityQuery("SecurityQuery");
+
+		System.out.println("\n##### Attachment Configuration Creation #####");
+		
+		PortComposantCompositeRequis pConfig = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceResultsAuth")).getPort("PortResultsAuth");
+		RoleCompositeFourni rFour = (RoleCompositeFourni)clearanceRequest.getInterfaceConnecteurComposite("RoleResultsAuth");
+		ResultAuth resultAuth = new ResultAuth(pConfig, rFour);
 		
 		System.out.println("\n##### Attachment Creation #####");
 		
