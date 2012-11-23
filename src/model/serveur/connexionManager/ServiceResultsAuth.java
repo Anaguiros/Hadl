@@ -1,18 +1,13 @@
 package model.serveur.connexionManager;
 
-import metaModel.composant.composite.PortComposantCompositeRequis;
+import metaModel.composant.composite.ServiceCompositeRequis;
 
-public class ServiceResultsAuth extends PortComposantCompositeRequis {
-
-	private PortResultsAuth portResultsAuth;
+public class ServiceResultsAuth extends ServiceCompositeRequis {
 	
-	public ServiceResultsAuth(String name, PortResultsAuth portResultsAuth) {
+	public ServiceResultsAuth(String name) {
 		super(name);
-		this.portResultsAuth = portResultsAuth;
-	}
-	
-	public PortResultsAuth getPortResultsAuth() {
-		return this.portResultsAuth;
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortResultsAuth(portName));
 	}
 
 }

@@ -3,16 +3,11 @@ package model.serveur.connexionManager;
 import metaModel.composant.composite.ServiceCompositeRequis;
 
 public class ServiceConnexion extends ServiceCompositeRequis {
-
-	private PortConnexion portConnexion;
 	
-	public ServiceConnexion(String name, PortConnexion portConnexion) {
+	public ServiceConnexion(String name) {
 		super(name);
-		this.portConnexion = portConnexion;
-	}
-	
-	public PortConnexion getPortConnexion() {
-		return this.portConnexion;
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortConnexion(portName));
 	}
 
 }

@@ -6,7 +6,8 @@ public class ServiceReceptionClient extends ServiceCompositeRequis {
 
 	public ServiceReceptionClient(String name){
 		super(name);
-		this.addPort(name, new PortReceptionClient(name));
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortReceptionClient(portName));
 	}
 	
 }

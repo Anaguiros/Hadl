@@ -12,6 +12,8 @@ public class ConnecteurComposite extends Connecteur {
 	public ConnecteurComposite(String name) {
 		this.name = name;
 		this.listInterfaces = new ArrayList<InterfaceConnecteurComposite>();
+		
+		System.out.println("Connector Composite Creation : "+name);
 	}
 	
 	public void addInterfaceConnecteurComposite(InterfaceConnecteurComposite icc) {

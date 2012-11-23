@@ -3,15 +3,11 @@ package model.serveur.connexionManager;
 import metaModel.composant.composite.ServiceCompositeFourni;
 
 public class ServiceRequete extends ServiceCompositeFourni {
-
-	private PortRequete portRequete;
 	
-	public ServiceRequete(String name, PortRequete portRequete) {
+	public ServiceRequete(String name) {
 		super(name);
-		this.portRequete = portRequete;
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortRequete(portName));
 	}
 
-	public PortRequete getPortRequete() {
-		return this.portRequete;
-	}
 }

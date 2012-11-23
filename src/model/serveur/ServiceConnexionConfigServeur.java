@@ -10,7 +10,8 @@ public class ServiceConnexionConfigServeur extends ServiceCompositeRequis {
 	public ServiceConnexionConfigServeur(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
-		this.addPort(name, new PortConnexionConfigServeur(name));
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortConnexionConfigServeur(portName));
 	}
 
 	

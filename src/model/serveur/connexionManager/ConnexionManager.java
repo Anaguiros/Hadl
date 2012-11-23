@@ -1,15 +1,24 @@
 package model.serveur.connexionManager;
 
-public class ConnexionManager {
+import metaModel.composant.composite.ComposantComposite;
 
+public class ConnexionManager extends ComposantComposite {
+	
 	private ServiceConnexion serviceConnexion;
 	private ServiceResultat serviceResultat;
 	private ServiceRequete serviceRequete;
 	private ServiceResultsAuth serviceResultsAuth;
 	private ServiceRequeteAuth serviceRequeteAuth;
-	
-	public ConnexionManager() {
+
+	public ConnexionManager(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
+		this.addInterface("ServiceResultsAuth", new ServiceResultsAuth("ServiceResultsAuth"));
+		this.addInterface("ServiceRequeteAuth", new ServiceRequeteAuth("ServiceRequeteAuth"));
+		this.addInterface("ServiceRequete", new ServiceRequete("ServiceRequete"));
+		this.addInterface("ServiceResultat", new ServiceResultat("ServiceResultat"));
+		
+		this.addInterface("ServiceConnexion", new ServiceConnexion("ServiceConnexion"));
 	}
 
 	public ServiceConnexion getServiceConnexion() {

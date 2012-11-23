@@ -6,7 +6,8 @@ public class ServiceEnvoiClient extends ServiceCompositeFourni {
 
 	public ServiceEnvoiClient(String name){
 		super(name);
-		this.addPort(name, new PortEnvoiClient(name));
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortEnvoiClient(portName));
 	}
 	
 }

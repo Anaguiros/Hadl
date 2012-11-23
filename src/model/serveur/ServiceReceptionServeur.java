@@ -10,7 +10,8 @@ public class ServiceReceptionServeur extends ServiceCompositeRequis {
 	public ServiceReceptionServeur(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
-		this.addPort(name, new PortReceptionServeur(name));
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortReceptionServeur(portName));
 	}
 
 	

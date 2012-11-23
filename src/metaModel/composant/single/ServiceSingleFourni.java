@@ -10,6 +10,8 @@ public class ServiceSingleFourni extends ServiceSingle {
 	public ServiceSingleFourni(String name) {
 		this.name = name;
 		this.listPorts = new ArrayList<PortComposantSingleFourni>();
+		
+		System.out.println("Service Component Single Provided Creation : "+name);
 	}
 	
 	public void addPortComposantSingleFourni(PortComposantSingleFourni port) {

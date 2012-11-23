@@ -12,6 +12,8 @@ public class ComposantSingle extends Composant {
 	public ComposantSingle(String name) {
 		this.name = name;
 		this.listInterfaces = new ArrayList<InterfaceComposantSingle>();
+		
+		System.out.println("Component Single Creation : "+name);
 	}
 	
 	public void addInterfaceComposantSingle(InterfaceComposantSingle ics) {

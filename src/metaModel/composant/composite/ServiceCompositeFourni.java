@@ -11,6 +11,8 @@ public class ServiceCompositeFourni extends ServiceComposite {
 	public ServiceCompositeFourni(String name){
 		this.name = name;
 		this.listPort = new ArrayList<PortComposantCompositeFourni>();
+		
+		System.out.println("Service Component Composite Provided Creation : "+name);
 	}
 	
 	public void addPort(String name, PortComposantCompositeFourni port){

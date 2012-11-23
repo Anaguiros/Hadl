@@ -16,6 +16,8 @@ public class Configuration extends Element {
 		this.name = name;
 		this.listElement = new ArrayList<Element>();
 		this.listInterface = new ArrayList<InterfaceConfiguration>();
+		
+		System.out.println("Configuration Creation : "+name);
 	}
 	
 	public String getName(){

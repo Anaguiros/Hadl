@@ -11,6 +11,8 @@ public class ServiceCompositeRequis extends ServiceComposite {
 	public ServiceCompositeRequis(String name){
 		this.name = name;
 		this.listPort = new ArrayList<PortComposantCompositeRequis>();
+		
+		System.out.println("Service Component Composite Required Creation : "+name);
 	}
 	
 	public void addPort(String name, PortComposantCompositeRequis port){

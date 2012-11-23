@@ -1,17 +1,15 @@
 package model.serveur.connexionManager;
 
 import metaModel.composant.composite.ServiceCompositeFourni;
+import model.client.PortEnvoiClient;
 
 public class ServiceRequeteAuth extends ServiceCompositeFourni {
-
-	private PortRequeteAuth portRequeteAuth;
 	
-	public ServiceRequeteAuth(String name, PortRequeteAuth portRequeteAuth) {
+	public ServiceRequeteAuth(String name) {
 		super(name);
-		this.portRequeteAuth = portRequeteAuth;
+		String portName = name.replace("Service", "Port");
+		this.addPort(portName, new PortRequeteAuth(portName));
 	}
 
-	public PortRequeteAuth getPortRequeteAuth() {
-		return this.portRequeteAuth;
-	}
+
 }
