@@ -1,6 +1,7 @@
 package impl;
 
 import metaModel.composant.composite.ComposantComposite;
+import metaModel.composant.composite.PortComposantCompositeFourni;
 import metaModel.composant.composite.PortComposantCompositeRequis;
 import metaModel.composant.composite.ServiceCompositeFourni;
 import metaModel.composant.composite.ServiceCompositeRequis;
@@ -17,7 +18,18 @@ import model.core.BindConnexionServeur;
 import model.core.BindServeur;
 import model.serveur.ServeurComposant;
 import model.serveur.ServeurConfiguration;
+import model.serveur.attachments.AuthComputing;
+import model.serveur.attachments.AuthResults;
+import model.serveur.attachments.Requete;
+import model.serveur.attachments.RequeteAuth;
+import model.serveur.attachments.RequeteSQL;
+import model.serveur.attachments.RequeteSecurity;
 import model.serveur.attachments.ResultAuth;
+import model.serveur.attachments.Resultat;
+import model.serveur.attachments.ResultatSQL;
+import model.serveur.attachments.ResultatSecurity;
+import model.serveur.attachments.SecurityComputing;
+import model.serveur.attachments.SecurityResults;
 import model.serveur.connector.clearanceRequest.ClearanceRequest;
 import model.serveur.connector.securityQuery.SecurityQuery;
 import model.serveur.connector.sqlQuery.SQLQuery;
@@ -52,9 +64,68 @@ public class Application {
 
 		System.out.println("\n##### Attachment Configuration Creation #####");
 		
-		PortComposantCompositeRequis pConfig = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceResultsAuth")).getPort("PortResultsAuth");
-		RoleCompositeFourni rFour = (RoleCompositeFourni)clearanceRequest.getInterfaceConnecteurComposite("RoleResultsAuth");
-		ResultAuth resultAuth = new ResultAuth(pConfig, rFour);
+		PortComposantCompositeRequis pConfigReq;
+		PortComposantCompositeFourni pConfigFour;
+		RoleCompositeFourni rFour;
+		RoleCompositeRequis rReq;
+		
+		ResultAuth resultAuth = new ResultAuth(((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceResultsAuth")).getPort("PortResultsAuth"),
+				(RoleCompositeFourni)clearanceRequest.getInterfaceConnecteurComposite("RoleResultsAuth"));
+		
+		pConfigFour = ((ServiceCompositeFourni)((ComposantComposite)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceRequeteAuth")).getPort("PortRequeteAuth");
+		rReq = (RoleCompositeRequis)clearanceRequest.getInterfaceConnecteurComposite("RoleRequeteAuth");
+		
+		RequeteAuth requeteAuth = new RequeteAuth(pConfigFour, rReq);
+		
+		pConfigReq = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceResultat")).getPort("PortResultat");
+		rFour = (RoleCompositeFourni)slqQuery.getInterfaceConnecteurComposite("RoleResultat");
+		
+		Resultat resultat = new Resultat(pConfigReq, rFour);
+		
+		pConfigFour = ((ServiceCompositeFourni)((ComposantComposite)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceRequete")).getPort("PortRequete");
+		rReq = (RoleCompositeRequis)slqQuery.getInterfaceConnecteurComposite("RoleRequete");
+		
+		Requete requete = new Requete(pConfigFour, rReq);
+		
+		pConfigFour = ((ServiceCompositeFourni)((ComposantComposite)serveurConfig.getElement("SecurityManager")).getInterface("ServiceAuthResults")).getPort("PortAuthResults");
+		rReq = (RoleCompositeRequis)clearanceRequest.getInterfaceConnecteurComposite("RoleAuthResults");
+		
+		AuthResults authResults = new AuthResults(pConfigFour, rReq);
+		
+		pConfigReq = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("SecurityManager")).getInterface("ServiceAuthComputing")).getPort("PortAuthComputing");
+		rFour = (RoleCompositeFourni)clearanceRequest.getInterfaceConnecteurComposite("RoleAuthComputing");
+		
+		AuthComputing authComputing = new AuthComputing(pConfigReq, rFour);
+		
+		pConfigFour = ((ServiceCompositeFourni)((ComposantComposite)serveurConfig.getElement("SecurityManager")).getInterface("ServiceSecurityResults")).getPort("PortSecurityResults");
+		rReq = (RoleCompositeRequis)securityQuery.getInterfaceConnecteurComposite("RoleSecurityResults");
+		
+		SecurityResults securityResults = new SecurityResults(pConfigFour, rReq);
+		
+		pConfigReq = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("SecurityManager")).getInterface("ServiceSecurityComputing")).getPort("PortSecurityComputing");
+		rFour = (RoleCompositeFourni)securityQuery.getInterfaceConnecteurComposite("RoleSecurityComputing");
+		
+		SecurityComputing securityComputing = new SecurityComputing(pConfigReq, rFour);
+		
+		pConfigReq = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("Database")).getInterface("ServiceRequeteSQL")).getPort("PortRequeteSQL");
+		rFour = (RoleCompositeFourni)slqQuery.getInterfaceConnecteurComposite("RoleRequeteSQL");
+		
+		RequeteSQL requeteSQL = new RequeteSQL(pConfigReq, rFour);
+		
+		pConfigFour = ((ServiceCompositeFourni)((ComposantComposite)serveurConfig.getElement("Database")).getInterface("ServiceResultatSQL")).getPort("PortResultatSQL");
+		rReq = (RoleCompositeRequis)slqQuery.getInterfaceConnecteurComposite("RoleResultatSQL");
+		
+		ResultatSQL resultatSQL = new ResultatSQL(pConfigFour, rReq);
+		
+		pConfigFour = ((ServiceCompositeFourni)((ComposantComposite)serveurConfig.getElement("Database")).getInterface("ServiceRequeteSecurity")).getPort("PortRequeteSecurity");
+		rReq = (RoleCompositeRequis)securityQuery.getInterfaceConnecteurComposite("RoleRequeteSecurity");
+		
+		RequeteSecurity requeteSecurity = new RequeteSecurity(pConfigFour, rReq);
+		
+		pConfigReq = ((ServiceCompositeRequis)((ComposantComposite)serveurConfig.getElement("Database")).getInterface("ServiceResultatSecurity")).getPort("PortResultatSecurity");
+		rFour = (RoleCompositeFourni)securityQuery.getInterfaceConnecteurComposite("RoleResultatSecurity");
+		
+		ResultatSecurity resultatSecurity = new ResultatSecurity(pConfigReq, rFour);
 		
 		System.out.println("\n##### Attachment Creation #####");
 		
