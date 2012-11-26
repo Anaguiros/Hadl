@@ -12,11 +12,11 @@ public class EnvoiClient extends AttachmentFourni {
 			RoleEnvoiClient role) {
 		
 		super(portCompo, role);
+		this.portCompo.addObserver(this);
 	}
 	
 	public void update(Observable o, Object object){
 		if(o instanceof PortEnvoiClient){
-			System.out.println("Attachment EnvoieClient : " + object);
 			((RoleEnvoiClient) this.role).receive(object);
 		}
 	}

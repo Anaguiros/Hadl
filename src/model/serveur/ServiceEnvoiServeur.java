@@ -20,6 +20,10 @@ public class ServiceEnvoiServeur extends ServiceCompositeFourni {
 		return portEnvoi;
 	}
 
+	public void send(Object object) {
+		this.portEnvoi.send(object);
+	}
+
 	
 
 }

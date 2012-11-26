@@ -9,6 +9,8 @@ public class RoleEnvoiClient extends RoleCompositeRequis {
 	}
 
 	public void receive(Object object) {
+		System.out.println("RPC Reception Client : " + object);
+		this.setChanged();
 		this.notifyObservers(object);
 	}
 

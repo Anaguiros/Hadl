@@ -10,6 +10,7 @@ public class PortReceptionClient extends PortComposantCompositeRequis {
 	}
 	
 	public void receive(Object object) {
+		this.setChanged();
 		this.notifyObservers(object);
 	}
 	

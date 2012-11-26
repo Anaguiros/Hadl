@@ -13,12 +13,11 @@ public class ReceptionClient extends AttachmentRequis {
 	public ReceptionClient(PortComposantCompositeRequis portCompo,
 			RoleCompositeFourni role) {
 		super(portCompo, role);
-		// TODO Auto-generated constructor stub
+		this.role.addObserver(this);
 	}
 	
 	public void update(Observable o, Object object) {
 		if(o instanceof RoleReceptionClient){
-			System.out.println("Attachment EnvoieClient : " + object);
 			((PortReceptionClient) this.portCompo).receive(object);
 		}
 	}

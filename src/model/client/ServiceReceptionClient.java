@@ -14,9 +14,9 @@ public class ServiceReceptionClient extends ServiceCompositeRequis implements Ob
 		String portName = name.replace("Service", "Port");
 		
 		this.portReceptionClient = new PortReceptionClient(portName, this);
+		this.portReceptionClient.addObserver(this);
 		
 		this.addPort(portName, portReceptionClient);
-		this.portReceptionClient.addObserver(this);
 	}
 
 	public PortReceptionClient getPortReceptionClient() {
@@ -25,6 +25,7 @@ public class ServiceReceptionClient extends ServiceCompositeRequis implements Ob
 	
 	public void update(Observable o, Object object) {
 		if (o instanceof PortReceptionClient) {
+			this.setChanged();
 			this.notifyObservers(object);
 		}
 	}

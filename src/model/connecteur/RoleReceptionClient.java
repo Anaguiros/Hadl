@@ -12,6 +12,8 @@ public class RoleReceptionClient extends RoleCompositeFourni {
 
 	@Override
 	public void update(Observable o, Object object) {
+		System.out.println("RPC Envoi vers " + this.countObservers() + " Client : " + object);
+		this.setChanged();
 		this.notifyObservers(object);
 	}
 

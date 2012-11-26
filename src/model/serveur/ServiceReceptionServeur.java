@@ -1,8 +1,11 @@
 package model.serveur;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import metaModel.composant.composite.ServiceCompositeRequis;
 
-public class ServiceReceptionServeur extends ServiceCompositeRequis {
+public class ServiceReceptionServeur extends ServiceCompositeRequis implements Observer {
 
 	private PortReceptionServeur portReception;
 	
@@ -12,7 +15,7 @@ public class ServiceReceptionServeur extends ServiceCompositeRequis {
 		String portName = name.replace("Service", "Port");
 		
 		this.portReception = new PortReceptionServeur(portName, this);
-		
+		this.portReception.addObserver(this);
 		this.addPort(portName, portReception);
 	}
 
@@ -20,6 +23,11 @@ public class ServiceReceptionServeur extends ServiceCompositeRequis {
 		return portReception;
 	}
 
-	
+	public void update(Observable o, Object object) {
+		if (o instanceof PortReceptionServeur) {
+			this.setChanged();
+			this.notifyObservers(object);
+		}
+	}
 	
 }

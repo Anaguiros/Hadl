@@ -13,14 +13,23 @@ import model.attachments.EnvoiServeur;
 import model.attachments.ReceptionClient;
 import model.attachments.ReceptionServeur;
 import model.client.Client;
+import model.client.PortEnvoiClient;
+import model.client.PortReceptionClient;
 import model.client.ServiceEnvoiClient;
 import model.client.ServiceReceptionClient;
 import model.connecteur.RPC;
 import model.connecteur.RoleEnvoiClient;
+import model.connecteur.RoleEnvoiServeur;
+import model.connecteur.RoleReceptionClient;
+import model.connecteur.RoleReceptionServeur;
 import model.core.BindConnexionServeur;
 import model.core.BindServeur;
+import model.serveur.PortEnvoiServeur;
+import model.serveur.PortReceptionServeur;
 import model.serveur.ServeurComposant;
 import model.serveur.ServeurConfiguration;
+import model.serveur.ServiceEnvoiServeur;
+import model.serveur.ServiceReceptionServeur;
 import model.serveur.attachments.AuthComputing;
 import model.serveur.attachments.AuthResults;
 import model.serveur.attachments.Requete;
@@ -58,6 +67,7 @@ public class Application {
 		System.out.println("\n##### RPC Creation #####");
 		RPC rpc = new RPC("monRPC");
 		
+		/*
 		System.out.println("\n##### Intern Connectors Creation #####");
 		ClearanceRequest clearanceRequest = new ClearanceRequest("ClearanceRequest");
 		SQLQuery slqQuery = new SQLQuery("SQLQuery");
@@ -127,20 +137,25 @@ public class Application {
 		rFour = (RoleCompositeFourni)securityQuery.getInterfaceConnecteurComposite("RoleResultatSecurity");
 		
 		ResultatSecurity resultatSecurity = new ResultatSecurity(pConfigReq, rFour);
+		*/
 		
 		System.out.println("\n##### Attachment Creation #####");
 				
-		EnvoiClient envoiClient = new EnvoiClient(((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient(), 
-				(RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"));
+		PortEnvoiClient pec = ((ServiceEnvoiClient) client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient();
+		RoleEnvoiClient rec = (RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient");
+		EnvoiClient envoiClient = new EnvoiClient(pec, rec);
 		
-		ReceptionClient receptionClient = new ReceptionClient(((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient"),
-				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient"));
-				
-		EnvoiServeur envoiServeur = new EnvoiServeur(((ServiceCompositeFourni)serveurCompo.getInterface("ServiceEnvoiServeur")).getPort("PortEnvoiServeur"), 
-				(RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiServeur"));
+		PortReceptionClient prc = ((ServiceReceptionClient)client.getInterface("ServiceReceptionClient")).getPortReceptionClient();
+		RoleReceptionClient rrc = (RoleReceptionClient) rpc.getInterfaceConnecteurComposite("RoleReceptionClient");
+		ReceptionClient receptionClient = new ReceptionClient(prc,rrc);
 		
-		ReceptionServeur receptionServeur = new ReceptionServeur(((ServiceCompositeRequis)serveurCompo.getInterface("ServiceReceptionServeur")).getPort("PortReceptionServeur"), 
-				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionServeur"));
+		PortEnvoiServeur pes = ((ServiceEnvoiServeur) serveurCompo.getInterface("ServiceEnvoiServeur")).getPortEnvoi();
+		RoleEnvoiServeur res = (RoleEnvoiServeur)rpc.getInterfaceConnecteurComposite("RoleEnvoiServeur");
+		EnvoiServeur envoiServeur = new EnvoiServeur(pes, res);
+		
+		PortReceptionServeur prs = ((ServiceReceptionServeur)serveurCompo.getInterface("ServiceReceptionServeur")).getPortReception();
+		RoleReceptionServeur rrs = (RoleReceptionServeur) rpc.getInterfaceConnecteurComposite("RoleReceptionServeur");
+		ReceptionServeur receptionServeur = new ReceptionServeur(prs,rrs);
 		
 		System.out.println("\n##### Binding Component-Configuration #####");
 		
@@ -157,11 +172,17 @@ public class Application {
 		
 		System.out.println("\n##### Mise en place des observers #####");
 		
-		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient().addObserver(envoiClient);
-		((ServiceReceptionClient)client.getInterface("ServiceReceptionClient")).getPortReceptionClient().addObserver(client);
+		//((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient().addObserver(envoiClient);
+		//((ServiceReceptionClient)client.getInterface("ServiceReceptionClient")).getPortReceptionClient().addObserver(client);
+		
+		System.out.println("\n##### Execution des méthodes glue() #####");
+		rpc.glue();
 		
 		System.out.println("\n##### Envoie message #####");
+		client.sendMessage("Test message client");
 		
-		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Plop !");
+		serveurCompo.sendMessage("Test message serveur");
+		
+		//((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Plop !");
 	}
 }

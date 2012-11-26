@@ -24,7 +24,9 @@ public class RPC extends ConnecteurComposite {
 	}
 	
 	public void glue() {
+		System.out.println("\tLink RoleEnvoiClient <-> RoleReceptionServeur");
 		this.roleEnvoiClient.addObserver(this.roleReceptionServeur);
+		System.out.println("\tLink RoleEnvoiServeur <-> RoleReceptionClient");
 		this.roleEnvoiServeur.addObserver(this.roleReceptionClient);
 	}
 

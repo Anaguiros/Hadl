@@ -12,12 +12,15 @@ public class Client extends ComposantComposite implements Observer {
 		this.addProprieteFonctionnelle("Code Source", null);
 		this.addProprieteNonFonctionnelle("Performance Data", null);
 		
-		this.addInterface("ServiceReceptionClient", new ServiceReceptionClient("ServiceReceptionClient"));
+		ServiceReceptionClient src = new ServiceReceptionClient("ServiceReceptionClient");
+		this.addInterface("ServiceReceptionClient", src);
 		this.addInterface("ServiceEnvoiClient", new ServiceEnvoiClient("ServiceEnvoiClient"));
+		src.addObserver(this);
 		
 	}
 
 	public void sendMessage(String message){
+		System.out.println("Envoi Client : " + message);
 		ServiceEnvoiClient serv = (ServiceEnvoiClient)(this.getInterface("ServiceEnvoiClient"));
 		serv.sendMessage(message);
 	}
@@ -25,7 +28,7 @@ public class Client extends ComposantComposite implements Observer {
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ServiceReceptionClient){
-			System.out.println(object);
+			System.out.println("Reception Client : " + object);
 		}
 	}
 	

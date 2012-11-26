@@ -9,4 +9,9 @@ public class RoleEnvoiServeur extends RoleCompositeRequis {
 		super(name);
 	}
 
+	public void receive(Object object) {
+		System.out.println("RPC Reception Serveur: " + object);
+		this.setChanged();
+		this.notifyObservers(object);
+	}
 }
