@@ -15,6 +15,7 @@ import model.attachments.ReceptionServeur;
 import model.client.Client;
 import model.client.PortEnvoiClient;
 import model.client.ServiceEnvoiClient;
+import model.client.ServiceReceptionClient;
 import model.connecteur.RPC;
 import model.connecteur.RoleEnvoiClient;
 import model.core.BindConnexionServeur;
@@ -132,9 +133,8 @@ public class Application {
 		
 		System.out.println("\n##### Attachment Creation #####");
 				
-		
 		EnvoiClient envoiClient = new EnvoiClient(((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient(), 
-				(RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"));
+				(RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"), rpc);
 		
 		ReceptionClient receptionClient = new ReceptionClient(((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient"),
 				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient"));
@@ -161,9 +161,10 @@ public class Application {
 		System.out.println("\n##### Mise en place des observers #####");
 		
 		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient().addObserver(envoiClient);
+		((ServiceReceptionClient)client.getInterface("ServiceReceptionClient")).getPortReceptionClient().addObserver(client);
 		
 		System.out.println("\n##### Envoie message #####");
 		
-		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Coucou !");
+		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Plop !");
 	}
 }

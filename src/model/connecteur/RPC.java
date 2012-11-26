@@ -4,50 +4,40 @@ import metaModel.connecteur.composite.ConnecteurComposite;
 
 public class RPC extends ConnecteurComposite {
 
-//	private RoleEnvoiClient roleEnvoiClient;
-//	private RoleEnvoiServeur roleEnvoiServeur;
-//	private RoleReceptionClient roleReceptionClient;
-//	private RoleReceptionServeur roleReceptionServeur;
+	private RoleEnvoiClient roleEnvoiClient;
+	private RoleEnvoiServeur roleEnvoiServeur;
+	private RoleReceptionClient roleReceptionClient;
+	private RoleReceptionServeur roleReceptionServeur;
 	
 	public RPC(String name) {
 		super(name);
 		
-		this.addInterfaceConnecteurComposite(new RoleEnvoiClient("RoleEnvoiClient"));
-		this.addInterfaceConnecteurComposite(new RoleReceptionClient("RoleReceptionClient"));
-		this.addInterfaceConnecteurComposite(new RoleEnvoiServeur("RoleEnvoiServeur"));
-		this.addInterfaceConnecteurComposite(new RoleReceptionServeur("RoleReceptionServeur"));
+		this.roleEnvoiClient = new RoleEnvoiClient("RoleEnvoiClient", this);
+		this.roleEnvoiServeur = new RoleEnvoiServeur("RoleEnvoiServeur", this);
+		this.roleReceptionClient = new RoleReceptionClient("RoleReceptionClient", this);
+		this.roleReceptionServeur = new RoleReceptionServeur("RoleReceptionServeur", this);
+		
+		this.addInterfaceConnecteurComposite(roleEnvoiClient);
+		this.addInterfaceConnecteurComposite(roleReceptionClient);
+		this.addInterfaceConnecteurComposite(roleEnvoiServeur);
+		this.addInterfaceConnecteurComposite(roleReceptionServeur);
+	}
+
+	public RoleEnvoiClient getRoleEnvoiClient() {
+		return roleEnvoiClient;
+	}
+
+	public RoleEnvoiServeur getRoleEnvoiServeur() {
+		return roleEnvoiServeur;
+	}
+
+	public RoleReceptionClient getRoleReceptionClient() {
+		return roleReceptionClient;
+	}
+
+	public RoleReceptionServeur getRoleReceptionServeur() {
+		return roleReceptionServeur;
 	}
 	
-//	public RoleEnvoiClient getRoleEnvoiClient() {
-//		return roleEnvoiClient;
-//	}
-//
-//	public void setRoleEnvoiClient(RoleEnvoiClient roleEnvoiClient) {
-//		this.roleEnvoiClient = roleEnvoiClient;
-//	}
-//
-//	public RoleEnvoiServeur getRoleEnvoiServeur() {
-//		return roleEnvoiServeur;
-//	}
-//
-//	public void setRoleEnvoiServeur(RoleEnvoiServeur roleEnvoiServeur) {
-//		this.roleEnvoiServeur = roleEnvoiServeur;
-//	}
-//
-//	public RoleReceptionClient getRoleReceptionClient() {
-//		return roleReceptionClient;
-//	}
-//
-//	public void setRoleReceptionClient(RoleReceptionClient roleReceptionClient) {
-//		this.roleReceptionClient = roleReceptionClient;
-//	}
-//
-//	public RoleReceptionServeur getRoleReceptionServeur() {
-//		return roleReceptionServeur;
-//	}
-//
-//	public void setRoleReceptionServeur(RoleReceptionServeur roleReceptionServeur) {
-//		this.roleReceptionServeur = roleReceptionServeur;
-//	}
 
 }

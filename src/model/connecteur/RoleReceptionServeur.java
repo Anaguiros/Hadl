@@ -4,8 +4,15 @@ import metaModel.connecteur.composite.RoleCompositeFourni;
 
 public class RoleReceptionServeur extends RoleCompositeFourni {
 
-	public RoleReceptionServeur(String name) {
+	private RPC rpc;
+	
+	public RoleReceptionServeur(String name, RPC rpc) {
 		super(name);
+		this.rpc = rpc;
+	}
+
+	public RPC getRpc() {
+		return rpc;
 	}
 
 }
