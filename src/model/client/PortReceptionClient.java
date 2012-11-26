@@ -9,4 +9,8 @@ public class PortReceptionClient extends PortComposantCompositeRequis {
 		super(name, service);
 	}
 	
+	public void receive(Object object) {
+		this.notifyObservers(object);
+	}
+	
 }

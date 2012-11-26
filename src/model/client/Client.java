@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import metaModel.composant.composite.ComposantComposite;
 
-public class Client extends ComposantComposite implements Observer{
+public class Client extends ComposantComposite implements Observer {
 
 	public Client(String name) {
 		super(name);
@@ -23,11 +23,9 @@ public class Client extends ComposantComposite implements Observer{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		String message = (String)arg;
+	public void update(Observable o, Object object) {
 		if (o instanceof ServiceReceptionClient){
-			System.out.println(message);
+			System.out.println(object);
 		}
 	}
 	

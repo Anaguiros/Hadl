@@ -1,18 +1,17 @@
 package model.connecteur;
 
+import java.util.Observable;
+
 import metaModel.connecteur.composite.RoleCompositeFourni;
 
 public class RoleReceptionServeur extends RoleCompositeFourni {
 
-	private RPC rpc;
-	
-	public RoleReceptionServeur(String name, RPC rpc) {
+	public RoleReceptionServeur(String name) {
 		super(name);
-		this.rpc = rpc;
 	}
 
-	public RPC getRpc() {
-		return rpc;
+	@Override
+	public void update(Observable o, Object object) {
+		this.notifyObservers(object);
 	}
-
 }

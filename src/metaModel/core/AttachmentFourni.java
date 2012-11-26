@@ -8,8 +8,8 @@ import metaModel.connecteur.composite.RoleCompositeRequis;
 
 public class AttachmentFourni implements Observer{
 
-	PortComposantCompositeFourni portCompo;
-	RoleCompositeRequis role;
+	protected PortComposantCompositeFourni portCompo;
+	protected RoleCompositeRequis role;
 	
 	public AttachmentFourni(PortComposantCompositeFourni portCompo, RoleCompositeRequis role){
 		this.portCompo = portCompo;

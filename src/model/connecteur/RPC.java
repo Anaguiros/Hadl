@@ -12,15 +12,20 @@ public class RPC extends ConnecteurComposite {
 	public RPC(String name) {
 		super(name);
 		
-		this.roleEnvoiClient = new RoleEnvoiClient("RoleEnvoiClient", this);
-		this.roleEnvoiServeur = new RoleEnvoiServeur("RoleEnvoiServeur", this);
-		this.roleReceptionClient = new RoleReceptionClient("RoleReceptionClient", this);
-		this.roleReceptionServeur = new RoleReceptionServeur("RoleReceptionServeur", this);
+		this.roleEnvoiClient = new RoleEnvoiClient("RoleEnvoiClient");
+		this.roleEnvoiServeur = new RoleEnvoiServeur("RoleEnvoiServeur");
+		this.roleReceptionClient = new RoleReceptionClient("RoleReceptionClient");
+		this.roleReceptionServeur = new RoleReceptionServeur("RoleReceptionServeur");
 		
 		this.addInterfaceConnecteurComposite(roleEnvoiClient);
 		this.addInterfaceConnecteurComposite(roleReceptionClient);
 		this.addInterfaceConnecteurComposite(roleEnvoiServeur);
 		this.addInterfaceConnecteurComposite(roleReceptionServeur);
+	}
+	
+	public void glue() {
+		this.roleEnvoiClient.addObserver(this.roleReceptionServeur);
+		this.roleEnvoiServeur.addObserver(this.roleReceptionClient);
 	}
 
 	public RoleEnvoiClient getRoleEnvoiClient() {

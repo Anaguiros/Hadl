@@ -6,7 +6,7 @@ import java.util.Observer;
 import metaModel.composant.composite.PortComposantCompositeRequis;
 import metaModel.connecteur.composite.RoleCompositeFourni;
 
-public class AttachmentRequis implements Observer{
+public class AttachmentRequis implements Observer {
 
 	protected PortComposantCompositeRequis portCompo;
 	protected RoleCompositeFourni role;
@@ -27,10 +27,7 @@ public class AttachmentRequis implements Observer{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update(Observable o, Object arg) {}
 	
 	
 	

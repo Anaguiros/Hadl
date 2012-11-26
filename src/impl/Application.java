@@ -13,7 +13,6 @@ import model.attachments.EnvoiServeur;
 import model.attachments.ReceptionClient;
 import model.attachments.ReceptionServeur;
 import model.client.Client;
-import model.client.PortEnvoiClient;
 import model.client.ServiceEnvoiClient;
 import model.client.ServiceReceptionClient;
 import model.connecteur.RPC;
@@ -38,8 +37,6 @@ import model.serveur.connector.clearanceRequest.ClearanceRequest;
 import model.serveur.connector.securityQuery.SecurityQuery;
 import model.serveur.connector.sqlQuery.SQLQuery;
 import model.serveur.connexionManager.ConnexionManager;
-import model.serveur.database.Database;
-import model.serveur.securityManager.SecurityManager;
 
 public class Application {
 
@@ -134,7 +131,7 @@ public class Application {
 		System.out.println("\n##### Attachment Creation #####");
 				
 		EnvoiClient envoiClient = new EnvoiClient(((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient(), 
-				(RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"), rpc);
+				(RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"));
 		
 		ReceptionClient receptionClient = new ReceptionClient(((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient"),
 				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient"));
