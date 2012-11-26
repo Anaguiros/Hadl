@@ -16,14 +16,16 @@ public class ServeurComposant extends ComposantComposite implements Observer {
 		super(name);
 		
 		ServiceReceptionServeur srs = new ServiceReceptionServeur("ServiceReceptionServeur");
+		ServiceConnexionConfigServeur sccs = new ServiceConnexionConfigServeur("ServiceConnexionConfigServeur");
 		this.addInterface("ServiceEnvoiServeur", new ServiceEnvoiServeur("ServiceEnvoiServeur"));
 		this.addInterface("ServiceReceptionServeur", srs);
-		this.addInterface("ServiceConnexionConfigServeur", new ServiceConnexionConfigServeur("ServiceConnexionConfigServeur"));
+		this.addInterface("ServiceConnexionConfigServeur", sccs);
 		
 		srs.addObserver(this);
+		sccs.addObserver(this);
 	}
 	
-	public void sendMessage(String message){
+	public void send(Object message){
 		System.out.println(" o | " + this.getClass().getSimpleName() + "     | Envoi Serveur : " + message);
 		ServiceEnvoiServeur serv = (ServiceEnvoiServeur)(this.getInterface("ServiceEnvoiServeur"));
 		serv.send(message);
@@ -41,7 +43,7 @@ public class ServeurComposant extends ComposantComposite implements Observer {
 			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from Client : " + object);
 		}
 		else if (o instanceof ServiceConnexionConfigServeur) {
-			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from Config : " + object);
+			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from ServeurConfiguration : " + object);
 		}
 	}
 

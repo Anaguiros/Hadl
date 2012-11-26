@@ -5,8 +5,8 @@ import metaModel.configuration.PortConfigRequis;
 
 public class BindingRequis {
 
-	PortConfigRequis portConfig;
-	PortComposantCompositeRequis portCompo;
+	protected PortConfigRequis portConfig;
+	protected PortComposantCompositeRequis portCompo;
 	
 	public BindingRequis(PortConfigRequis portConfig, PortComposantCompositeRequis portCompo){
 		this.portConfig = portConfig;

@@ -25,21 +25,29 @@ public class ServeurConfiguration extends Configuration implements Observer {
 		this.addElement("Database", new Database("Database"));
 		
 		ConnexionComposantServeur ccs = new ConnexionComposantServeur("ConnexionComposantServeur");
-		this.addInterface("PortConnexionServeur", new PortConnexionServer("PortConnexionServeur"));
+		PortConnexionServer pcs = new PortConnexionServer("PortConnexionServeur");
+		this.addInterface("PortConnexionServeur", pcs);
 		this.addInterface("ConnexionComposantServeur", ccs);
 		ccs.addObserver(this);
+		pcs.addObserver(this);
 	}
 
 	public void send(Object object) {
-		System.out.println(" o | " + this.getClass().getSimpleName() + " | Send to Serveur : " + object);
+		System.out.println(" o | " + this.getClass().getSimpleName() + " | Send to ServeurComposant : " + object);
 		ConnexionComposantServeur serv = (ConnexionComposantServeur)(this.getInterface("ConnexionComposantServeur"));
-		serv.send(object);
+		serv.send(this, object);
 	}
 	
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ConnexionComposantServeur) {
 			System.out.println(" o | " + this.getClass().getSimpleName() + " | Reception from Serveur : " + object);
+			PortConnexionServer pcs = (PortConnexionServer) this.getInterface("PortConnexionServeur");
+			pcs.send(this, object);
+		}
+		else if (o instanceof PortConnexionServer) {
+			System.out.println(" o | " + this.getClass().getSimpleName() + " | Reception from ConnexionManager : " + object);
+			this.send(object);
 		}
 	}
 

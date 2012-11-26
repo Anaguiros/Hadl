@@ -26,6 +26,7 @@ import model.core.BindConnexionServeur;
 import model.core.BindServeur;
 import model.serveur.ConnexionComposantServeur;
 import model.serveur.PortConnexionConfigServeur;
+import model.serveur.PortConnexionServer;
 import model.serveur.PortEnvoiServeur;
 import model.serveur.PortReceptionServeur;
 import model.serveur.ServeurComposant;
@@ -49,6 +50,7 @@ import model.serveur.connector.clearanceRequest.ClearanceRequest;
 import model.serveur.connector.securityQuery.SecurityQuery;
 import model.serveur.connector.sqlQuery.SQLQuery;
 import model.serveur.connexionManager.ConnexionManager;
+import model.serveur.connexionManager.PortConnexion;
 
 public class Application {
 
@@ -147,26 +149,27 @@ public class Application {
 		PortEnvoiClient pec = ((ServiceEnvoiClient) client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient();
 		RoleEnvoiClient rec = (RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient");
 		EnvoiClient envoiClient = new EnvoiClient(pec, rec);
-		/*
+		
 		PortReceptionClient prc = ((ServiceReceptionClient)client.getInterface("ServiceReceptionClient")).getPortReceptionClient();
 		RoleReceptionClient rrc = (RoleReceptionClient) rpc.getInterfaceConnecteurComposite("RoleReceptionClient");
 		ReceptionClient receptionClient = new ReceptionClient(prc,rrc);
-		*/
+		
 		PortEnvoiServeur pes = ((ServiceEnvoiServeur) serveurCompo.getInterface("ServiceEnvoiServeur")).getPortEnvoi();
 		RoleEnvoiServeur res = (RoleEnvoiServeur)rpc.getInterfaceConnecteurComposite("RoleEnvoiServeur");
 		EnvoiServeur envoiServeur = new EnvoiServeur(pes, res);
-		/*
+		
 		PortReceptionServeur prs = ((ServiceReceptionServeur)serveurCompo.getInterface("ServiceReceptionServeur")).getPortReception();
 		RoleReceptionServeur rrs = (RoleReceptionServeur) rpc.getInterfaceConnecteurComposite("RoleReceptionServeur");
 		ReceptionServeur receptionServeur = new ReceptionServeur(prs,rrs);
-		*/
+		
 		System.out.println("\n##### Binding Component-Configuration #####");
 		
-		PortConfigRequis pConf = (PortConfigRequis)(serveurConfig.getInterface("PortConnexionServeur"));
-		PortComposantCompositeRequis pCom = ((ServiceCompositeRequis)((ConnexionManager)serveurConfig.getElement("ConnexionManager")).getInterface("ServiceConnexion")).getPort("PortConnexion");
+		ConnexionManager cm = (ConnexionManager) serveurConfig.getElement("ConnexionManager");
+		PortConnexion pc = cm.getServiceConnexion().getPortConnexion();
+		PortConnexionServer pcs = (PortConnexionServer) serveurConfig.getInterface("PortConnexionServeur");
 		
 		//Bind interne à Serveur
-		BindConnexionServeur bindConnexionServeur = new BindConnexionServeur(pConf, pCom);
+		BindConnexionServeur bindConnexionServeur = new BindConnexionServeur(pcs, pc);
 		
 		//Bind Compo--Config
 		
@@ -186,12 +189,12 @@ public class Application {
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("   | Class                | Details");
 		System.out.println("-----------------------------------------------------------------------------------");
-		client.sendMessage("Test message client");
+		client.send("Test message client");
 		System.out.println("-----------------------------------------------------------------------------------");
-		serveurCompo.sendMessage("Test message serveur");
+		serveurCompo.send(serveurCompo.getInterface("ServiceConnexionConfigServeur"));
 		System.out.println("-----------------------------------------------------------------------------------");
 		serveurCompo.execute(new Object());
 		System.out.println("-----------------------------------------------------------------------------------");
-		//((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Plop !");
+		
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import metaModel.composant.composite.ComposantComposite;
 
-public class ConnexionManager extends ComposantComposite implements Observer{
+public class ConnexionManager extends ComposantComposite implements Observer {
 	
 	private ServiceConnexion serviceConnexion;
 	private ServiceResultat serviceResultat;
@@ -16,12 +16,19 @@ public class ConnexionManager extends ComposantComposite implements Observer{
 	public ConnexionManager(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
-		this.addInterface("ServiceResultsAuth", new ServiceResultsAuth("ServiceResultsAuth"));
-		this.addInterface("ServiceRequeteAuth", new ServiceRequeteAuth("ServiceRequeteAuth"));
-		this.addInterface("ServiceRequete", new ServiceRequete("ServiceRequete"));
-		this.addInterface("ServiceResultat", new ServiceResultat("ServiceResultat"));
-		
-		this.addInterface("ServiceConnexion", new ServiceConnexion("ServiceConnexion"));
+		this.serviceResultsAuth = new ServiceResultsAuth("ServiceResultsAuth");
+		this.serviceRequeteAuth = new ServiceRequeteAuth("ServiceRequeteAuth");
+		this.serviceRequete = new ServiceRequete("ServiceRequete");
+		this.serviceResultat = new ServiceResultat("ServiceResultat");
+		this.serviceConnexion = new ServiceConnexion("ServiceConnexion");
+		this.serviceResultsAuth.addObserver(this);
+		this.serviceResultat.addObserver(this);
+		this.serviceConnexion.addObserver(this);
+		this.addInterface("ServiceResultsAuth", this.serviceResultsAuth);
+		this.addInterface("ServiceRequeteAuth", this.serviceRequeteAuth);
+		this.addInterface("ServiceRequete", this.serviceRequete);
+		this.addInterface("ServiceResultat", this.serviceResultat);
+		this.addInterface("ServiceConnexion", this.serviceConnexion);
 	}
 
 	public ServiceConnexion getServiceConnexion() {
@@ -65,9 +72,18 @@ public class ConnexionManager extends ComposantComposite implements Observer{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void update(Observable o, Object object) {
+		if (o instanceof ServiceConnexion) {
+			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception depuis ServeurConfiguration");
+			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Renvoie vers ServeurConfiguration");
+			this.serviceConnexion.getPortConnexion().send(this.serviceConnexion, object);
+		}
+		else if (o instanceof ServiceResultat) {
+			this.serviceConnexion.getPortConnexion().send(this.serviceConnexion, object);
+		}
+		else if (o instanceof ServiceResultsAuth) {
+			this.serviceConnexion.getPortConnexion().send(this.serviceConnexion, object);
+		}
 	}
 
 }

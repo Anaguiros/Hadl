@@ -19,7 +19,7 @@ public class Client extends ComposantComposite implements Observer {
 		
 	}
 
-	public void sendMessage(String message){
+	public void send(Object message){
 		System.out.println(" o | " + this.getClass().getSimpleName() + "               | Send to Serveur : " + message);
 		ServiceEnvoiClient serv = (ServiceEnvoiClient)(this.getInterface("ServiceEnvoiClient"));
 		serv.sendMessage(message);
