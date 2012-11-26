@@ -9,6 +9,10 @@ public class ConnecteurComposite extends Connecteur {
 	//Composition d'interfaces
 	private ArrayList<InterfaceConnecteurComposite> listInterfaces;
 
+	/**
+	 * Constructeur de Connecteur Composite.
+	 * @param name
+	 */
 	public ConnecteurComposite(String name) {
 		this.name = name;
 		this.listInterfaces = new ArrayList<InterfaceConnecteurComposite>();

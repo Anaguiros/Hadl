@@ -11,6 +11,11 @@ public class AttachmentFourni implements Observer{
 	protected PortComposantCompositeFourni portCompo;
 	protected RoleCompositeRequis role;
 	
+	/**
+	 * Constructeur d'un attachment fourni entre un {@link PortComposantCompositeFourni} et un {@link RoleCompositeRequis}.
+	 * @param portCompo
+	 * @param role
+	 */
 	public AttachmentFourni(PortComposantCompositeFourni portCompo, RoleCompositeRequis role){
 		this.portCompo = portCompo;
 		this.role = role;
