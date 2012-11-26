@@ -11,6 +11,11 @@ public class AttachmentRequis implements Observer {
 	protected PortComposantCompositeRequis portCompo;
 	protected RoleCompositeFourni role;
 	
+	/**
+	 * Constructeur d'un Attachment Requis, entre un {@link PortComposantCompositeRequis} et un {@link RoleCompositeFourni}.
+	 * @param portCompo
+	 * @param role
+	 */
 	public  AttachmentRequis(PortComposantCompositeRequis portCompo, RoleCompositeFourni role){
 		this.portCompo = portCompo;
 		this.role = role;
