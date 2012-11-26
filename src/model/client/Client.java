@@ -1,8 +1,11 @@
 package model.client;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import metaModel.composant.composite.ComposantComposite;
 
-public class Client extends ComposantComposite{
+public class Client extends ComposantComposite implements Observer{
 
 	public Client(String name) {
 		super(name);
@@ -11,6 +14,21 @@ public class Client extends ComposantComposite{
 		
 		this.addInterface("ServiceReceptionClient", new ServiceReceptionClient("ServiceReceptionClient"));
 		this.addInterface("ServiceEnvoiClient", new ServiceEnvoiClient("ServiceEnvoiClient"));
+		
 	}
 
+	public void sendMessage(String message){
+		ServiceEnvoiClient serv = (ServiceEnvoiClient)(this.getInterface("ServiceEnvoiClient"));
+		serv.sendMessage(message);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		String message = (String)arg;
+		if (o instanceof ServiceReceptionClient){
+			System.out.println(message);
+		}
+	}
+	
 }

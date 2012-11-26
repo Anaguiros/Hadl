@@ -23,7 +23,7 @@ public class ServiceCompositeRequis extends ServiceComposite {
 			}
 		}
 		
-		listPort.add(new PortComposantCompositeRequis(name));
+		listPort.add(new PortComposantCompositeRequis(name, this));
 	}
 	
 	public PortComposantCompositeRequis getPort(String name){

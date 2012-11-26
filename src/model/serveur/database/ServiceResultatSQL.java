@@ -4,11 +4,20 @@ import metaModel.composant.composite.ServiceCompositeFourni;
 
 public class ServiceResultatSQL extends ServiceCompositeFourni {
 
+	private PortResultatSQL portResultatSQL;
+	
 	public ServiceResultatSQL(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
 		String portName = name.replace("Service", "Port");
-		this.addPort(portName, new PortResultatSQL(portName));
+		
+		this.portResultatSQL = new PortResultatSQL(portName, this);
+		
+		this.addPort(portName, portResultatSQL);
+	}
+
+	public PortResultatSQL getPortResultatSQL() {
+		return portResultatSQL;
 	}
 
 }

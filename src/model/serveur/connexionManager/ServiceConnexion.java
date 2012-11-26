@@ -4,10 +4,19 @@ import metaModel.composant.composite.ServiceCompositeRequis;
 
 public class ServiceConnexion extends ServiceCompositeRequis {
 	
+	private PortConnexion portConnexion;
+	
 	public ServiceConnexion(String name) {
 		super(name);
 		String portName = name.replace("Service", "Port");
-		this.addPort(portName, new PortConnexion(portName));
+		
+		this.portConnexion = new PortConnexion(portName, this);
+		
+		this.addPort(portName, portConnexion);
+	}
+
+	public PortConnexion getPortConnexion() {
+		return portConnexion;
 	}
 
 }
