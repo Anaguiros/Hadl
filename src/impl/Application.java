@@ -13,7 +13,10 @@ import model.attachments.EnvoiServeur;
 import model.attachments.ReceptionClient;
 import model.attachments.ReceptionServeur;
 import model.client.Client;
+import model.client.PortEnvoiClient;
+import model.client.ServiceEnvoiClient;
 import model.connecteur.RPC;
+import model.connecteur.RoleEnvoiClient;
 import model.core.BindConnexionServeur;
 import model.core.BindServeur;
 import model.serveur.ServeurComposant;
@@ -128,9 +131,10 @@ public class Application {
 		ResultatSecurity resultatSecurity = new ResultatSecurity(pConfigReq, rFour);
 		
 		System.out.println("\n##### Attachment Creation #####");
+				
 		
-		EnvoiClient envoiClient = new EnvoiClient(((ServiceCompositeFourni)client.getInterface("ServiceEnvoiClient")).getPort("PortEnvoiClient"), 
-				(RoleCompositeRequis)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"));
+		EnvoiClient envoiClient = new EnvoiClient(((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient(), 
+				(RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient"));
 		
 		ReceptionClient receptionClient = new ReceptionClient(((ServiceCompositeRequis)client.getInterface("ServiceReceptionClient")).getPort("PortReceptionClient"),
 				(RoleCompositeFourni) rpc.getInterfaceConnecteurComposite("RoleReceptionClient"));
@@ -153,5 +157,13 @@ public class Application {
 		pConf = (PortConfigRequis)(serveurConfig.getInterface("ConnexionComposantServeur"));
 		pCom = ((ServiceCompositeRequis)serveurCompo.getInterface("ServiceConnexionConfigServeur")).getPort("PortConnexionConfigServeur");
 		BindServeur bindServeur = new BindServeur(pConf, pCom);
+		
+		System.out.println("\n##### Mise en place des observers #####");
+		
+		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient().addObserver(envoiClient);
+		
+		System.out.println("\n##### Envoie message #####");
+		
+		((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Coucou !");
 	}
 }

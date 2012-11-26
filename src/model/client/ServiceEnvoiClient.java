@@ -19,4 +19,7 @@ public class ServiceEnvoiClient extends ServiceCompositeFourni {
 		return portEnvoiClient;
 	}
 	
+	public void sendMessage(String message){
+		this.getPortEnvoiClient().sendMessage(message);
+	}
 }

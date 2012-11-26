@@ -13,4 +13,9 @@ public class Client extends ComposantComposite{
 		this.addInterface("ServiceEnvoiClient", new ServiceEnvoiClient("ServiceEnvoiClient"));
 	}
 
+	public void sendMessage(String message){
+		ServiceEnvoiClient serv = (ServiceEnvoiClient)(this.getInterface("ServiceEnvoiClient"));
+		serv.sendMessage(message);
+	}
+	
 }
