@@ -12,7 +12,12 @@ public class RoleReceptionServeur extends RoleCompositeFourni {
 
 	@Override
 	public void update(Observable o, Object object) {
-		System.out.println("RPC Envoi vers " + this.countObservers() + " Serveur : " + object);
+		if (this.countObservers() == 0) {
+			System.out.println(" x | Arrêt de la propagation de l'objet : aucun attachement sur RoleReceptionServeur");
+		}
+		else {
+			System.out.println(" o | RPC Client -> " + this.countObservers() + " Serveur : " + object);
+		}
 		this.setChanged();
 		this.notifyObservers(object);
 	}

@@ -10,6 +10,9 @@ public class PortReceptionServeur extends PortComposantCompositeRequis {
 	}
 
 	public void receive(Object object) {
+		if (this.countObservers() == 0) {
+			System.out.println(" x | Arrêt de la propagation de l'objet : aucun attachement sur PortReceptionServeur");
+		}	
 		this.setChanged();
 		this.notifyObservers(object);
 	}

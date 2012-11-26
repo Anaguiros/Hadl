@@ -9,7 +9,12 @@ public class RoleEnvoiClient extends RoleCompositeRequis {
 	}
 
 	public void receive(Object object) {
-		System.out.println("RPC Reception Client : " + object);
+		if (this.countObservers() == 0) {
+			System.out.println(" x | Arrêt de la propagation de l'objet : aucun attachement sur RoleEnvoiClient");
+		}
+		else {
+			System.out.println(" o | RPC Client -> Serveur : " + object);
+		}
 		this.setChanged();
 		this.notifyObservers(object);
 	}

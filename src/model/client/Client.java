@@ -20,7 +20,7 @@ public class Client extends ComposantComposite implements Observer {
 	}
 
 	public void sendMessage(String message){
-		System.out.println("Envoi Client : " + message);
+		System.out.println(" o | Envoi Client : " + message);
 		ServiceEnvoiClient serv = (ServiceEnvoiClient)(this.getInterface("ServiceEnvoiClient"));
 		serv.sendMessage(message);
 	}
@@ -28,7 +28,7 @@ public class Client extends ComposantComposite implements Observer {
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ServiceReceptionClient){
-			System.out.println("Reception Client : " + object);
+			System.out.println(" o | Reception Client : " + object);
 		}
 	}
 	

@@ -24,10 +24,13 @@ import model.connecteur.RoleReceptionClient;
 import model.connecteur.RoleReceptionServeur;
 import model.core.BindConnexionServeur;
 import model.core.BindServeur;
+import model.serveur.ConnexionComposantServeur;
+import model.serveur.PortConnexionConfigServeur;
 import model.serveur.PortEnvoiServeur;
 import model.serveur.PortReceptionServeur;
 import model.serveur.ServeurComposant;
 import model.serveur.ServeurConfiguration;
+import model.serveur.ServiceConnexionConfigServeur;
 import model.serveur.ServiceEnvoiServeur;
 import model.serveur.ServiceReceptionServeur;
 import model.serveur.attachments.AuthComputing;
@@ -166,9 +169,10 @@ public class Application {
 		BindConnexionServeur bindConnexionServeur = new BindConnexionServeur(pConf, pCom);
 		
 		//Bind Compo--Config
-		pConf = (PortConfigRequis)(serveurConfig.getInterface("ConnexionComposantServeur"));
-		pCom = ((ServiceCompositeRequis)serveurCompo.getInterface("ServiceConnexionConfigServeur")).getPort("PortConnexionConfigServeur");
-		BindServeur bindServeur = new BindServeur(pConf, pCom);
+		
+		ConnexionComposantServeur ccs = (ConnexionComposantServeur)(serveurConfig.getInterface("ConnexionComposantServeur"));
+		PortConnexionConfigServeur sccs = ((ServiceConnexionConfigServeur) serveurCompo.getInterface("ServiceConnexionConfigServeur")).getPortConnexionConfig();
+		BindServeur bindServeur = new BindServeur(ccs, sccs);
 		
 		System.out.println("\n##### Mise en place des observers #####");
 		
@@ -182,6 +186,7 @@ public class Application {
 		client.sendMessage("Test message client");
 		
 		serveurCompo.sendMessage("Test message serveur");
+		serveurCompo.execute("Test message serveur");
 		
 		//((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Plop !");
 	}
