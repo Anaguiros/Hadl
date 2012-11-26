@@ -7,4 +7,9 @@ public class PortComposantCompositeFourni extends PortComposantComposite {
 		
 		System.out.println("Port Component Composite Provided Creation : "+name);
 	}
+	
+	public void sendMessage(String msg){
+		setChanged();
+		notifyObservers(msg);
+	}
 }

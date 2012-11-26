@@ -7,4 +7,6 @@ public class PortComposantCompositeRequis extends PortComposantComposite {
 		
 		System.out.println("Port Component Composite Required Creation : "+name);
 	}
+	
+	
 }

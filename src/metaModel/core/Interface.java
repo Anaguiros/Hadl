@@ -1,6 +1,8 @@
 package metaModel.core;
 
-public abstract class Interface {
+import java.util.Observable;
+
+public abstract class Interface extends Observable{
 
 	public enum Type {
 		PRIVATE,
