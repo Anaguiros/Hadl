@@ -26,7 +26,7 @@ public abstract class Composant extends Element {
 	}
 	
 	/**
-	 * Ajoute, ou met à jour, une propriete fonctionnelle existante.
+	 * Ajoute, ou met à jour, une propriete non fonctionnelle existante.
 	 * @param name
 	 * @param value
 	 */
@@ -42,7 +42,7 @@ public abstract class Composant extends Element {
 	}
 	
 	/**
-	 * return une propriete existante. Retourne null si la proproete n'existe pas.
+	 * return une propriete existante. Retourne null si la propriete n'existe pas.
 	 * @param name
 	 * @return
 	 */
