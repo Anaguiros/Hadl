@@ -31,7 +31,7 @@ public class ServeurConfiguration extends Configuration implements Observer {
 	}
 
 	public void send(Object object) {
-		System.out.println(" o | Envoi vers Serveur : " + object);
+		System.out.println(" o | " + this.getClass().getSimpleName() + " | Send to Serveur : " + object);
 		ConnexionComposantServeur serv = (ConnexionComposantServeur)(this.getInterface("ConnexionComposantServeur"));
 		serv.send(object);
 	}
@@ -39,7 +39,7 @@ public class ServeurConfiguration extends Configuration implements Observer {
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ConnexionComposantServeur) {
-			System.out.println(" o | Reception from Serveur : " + object);
+			System.out.println(" o | " + this.getClass().getSimpleName() + " | Reception from Serveur : " + object);
 		}
 	}
 

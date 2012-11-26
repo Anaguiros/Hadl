@@ -147,19 +147,19 @@ public class Application {
 		PortEnvoiClient pec = ((ServiceEnvoiClient) client.getInterface("ServiceEnvoiClient")).getPortEnvoiClient();
 		RoleEnvoiClient rec = (RoleEnvoiClient)rpc.getInterfaceConnecteurComposite("RoleEnvoiClient");
 		EnvoiClient envoiClient = new EnvoiClient(pec, rec);
-		
+		/*
 		PortReceptionClient prc = ((ServiceReceptionClient)client.getInterface("ServiceReceptionClient")).getPortReceptionClient();
 		RoleReceptionClient rrc = (RoleReceptionClient) rpc.getInterfaceConnecteurComposite("RoleReceptionClient");
 		ReceptionClient receptionClient = new ReceptionClient(prc,rrc);
-		
+		*/
 		PortEnvoiServeur pes = ((ServiceEnvoiServeur) serveurCompo.getInterface("ServiceEnvoiServeur")).getPortEnvoi();
 		RoleEnvoiServeur res = (RoleEnvoiServeur)rpc.getInterfaceConnecteurComposite("RoleEnvoiServeur");
 		EnvoiServeur envoiServeur = new EnvoiServeur(pes, res);
-		
+		/*
 		PortReceptionServeur prs = ((ServiceReceptionServeur)serveurCompo.getInterface("ServiceReceptionServeur")).getPortReception();
 		RoleReceptionServeur rrs = (RoleReceptionServeur) rpc.getInterfaceConnecteurComposite("RoleReceptionServeur");
 		ReceptionServeur receptionServeur = new ReceptionServeur(prs,rrs);
-		
+		*/
 		System.out.println("\n##### Binding Component-Configuration #####");
 		
 		PortConfigRequis pConf = (PortConfigRequis)(serveurConfig.getInterface("PortConnexionServeur"));
@@ -182,12 +182,16 @@ public class Application {
 		System.out.println("\n##### Execution des méthodes glue() #####");
 		rpc.glue();
 		
-		System.out.println("\n##### Envoie message #####");
+		System.out.println("\n##### Envois #####");
+		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("   | Class                | Details");
+		System.out.println("-----------------------------------------------------------------------------------");
 		client.sendMessage("Test message client");
-		
+		System.out.println("-----------------------------------------------------------------------------------");
 		serveurCompo.sendMessage("Test message serveur");
-		serveurCompo.execute("Test message serveur");
-		
+		System.out.println("-----------------------------------------------------------------------------------");
+		serveurCompo.execute(new Object());
+		System.out.println("-----------------------------------------------------------------------------------");
 		//((ServiceEnvoiClient)client.getInterface("ServiceEnvoiClient")).sendMessage("Plop !");
 	}
 }

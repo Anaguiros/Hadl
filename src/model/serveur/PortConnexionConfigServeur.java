@@ -22,7 +22,7 @@ public class PortConnexionConfigServeur extends PortComposantCompositeRequis {
 	
 	public void send(Object object) {
 		if (this.countObservers() == 1 && this.observers.get(0).getClass() == ServiceConnexionConfigServeur.class) {
-			System.out.println(" x | Arrêt de la propagation de l'objet : aucun binding sur " + this.getClass().getSimpleName());
+			System.out.println(" x | " + this.getClass().getSimpleName() + " | Arrêt de la propagation de l'objet : aucun binding");
 		}
 		this.setChanged();
 		this.notifyObservers(object);
