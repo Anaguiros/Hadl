@@ -23,7 +23,7 @@ public class ServiceCompositeFourni extends ServiceComposite {
 			}
 		}
 		
-		listPort.add(new PortComposantCompositeFourni(name));
+		listPort.add(new PortComposantCompositeFourni(name, this));
 	}
 	
 	public PortComposantCompositeFourni getPort(String name){
