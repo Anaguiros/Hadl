@@ -1,8 +1,11 @@
 package model.serveur.connexionManager;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import metaModel.composant.composite.ComposantComposite;
 
-public class ConnexionManager extends ComposantComposite {
+public class ConnexionManager extends ComposantComposite implements Observer{
 	
 	private ServiceConnexion serviceConnexion;
 	private ServiceResultat serviceResultat;
@@ -59,6 +62,12 @@ public class ConnexionManager extends ComposantComposite {
 
 	public void setServiceResultat(ServiceResultat serviceResultat) {
 		this.serviceResultat = serviceResultat;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

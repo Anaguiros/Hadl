@@ -18,6 +18,10 @@ public class ServiceRequeteAuth extends ServiceCompositeFourni {
 	public PortRequete getPortRequete() {
 		return portRequete;
 	}
+	
+	public void send(Object object){
+		this.portRequete.send(object);
+	}
 
 
 }

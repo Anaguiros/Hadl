@@ -9,4 +9,11 @@ public class RoleRequeteAuth extends RoleCompositeRequis {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void receive(Object object) {
+		// TODO Auto-generated method stub
+		System.out.println("ClearanceRequest Role Requete Auth : " + object);
+		this.setChanged();
+		this.notifyObservers(object);
+	}
+
 }
