@@ -18,7 +18,9 @@ public class ReceptionClient extends AttachmentRequis {
 	
 	public void update(Observable o, Object object) {
 		if(o instanceof RoleReceptionClient){
-			((PortReceptionClient) this.portCompo).receive(object);
+			if(object instanceof AuthResponseMessage){
+				((PortReceptionClient) this.portCompo).receive(object);
+			}
 		}
 	}
 
