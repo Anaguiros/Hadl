@@ -2,7 +2,14 @@ package model.core;
 
 public class DatabaseQueryMessage extends Message {
 
-	public DatabaseQueryMessage(String contenu){
-		this.contenu = contenu;
+	private String query;
+	
+	public DatabaseQueryMessage(String query){
+		this.contenu = DEFAULT_CONTENT;
+		this.query = query;
+	}
+
+	public String getQuery() {
+		return query;
 	}
 }

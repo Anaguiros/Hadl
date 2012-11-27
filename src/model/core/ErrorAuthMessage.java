@@ -2,7 +2,14 @@ package model.core;
 
 public class ErrorAuthMessage extends Message {
 
-	public ErrorAuthMessage(String contenu){
-		this.contenu = contenu;
+	private String error;
+	
+	public ErrorAuthMessage(String error){
+		this.contenu = DEFAULT_CONTENT;
+		this.error = error;
+	}
+
+	public String getError() {
+		return error;
 	}
 }
