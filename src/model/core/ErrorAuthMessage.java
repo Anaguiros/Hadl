@@ -12,4 +12,10 @@ public class ErrorAuthMessage extends Message {
 	public String getError() {
 		return error;
 	}
+
+	@Override
+	public String toString() {
+		return "ErrorAuthMessage [error=" + error + ", contenu=" + contenu
+				+ "]";
+	}
 }

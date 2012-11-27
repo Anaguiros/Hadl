@@ -12,4 +12,10 @@ public class DatabaseResultMessage extends Message {
 	public String getResult() {
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "DatabaseResultMessage [result=" + result + ", contenu="
+				+ contenu + "]";
+	}
 }

@@ -2,7 +2,7 @@ package model.core;
 
 public abstract class Message {
 
-	protected final static String DEFAULT_CONTENT = "DEFAULT_CONTENT";
+	protected final static String DEFAULT_CONTENT = "DEFAULT";
 	
 	protected String contenu;
 

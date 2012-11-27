@@ -17,6 +17,12 @@ public class AuthMessage extends Message {
 	public String getPass() {
 		return pass;
 	}
+
+	@Override
+	public String toString() {
+		return "AuthMessage [login=" + login + ", pass=" + pass + ", contenu="
+				+ contenu + "]";
+	}
 	
 	
 }

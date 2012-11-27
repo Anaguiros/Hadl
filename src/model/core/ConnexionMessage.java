@@ -22,6 +22,12 @@ public class ConnexionMessage extends Message {
 	public String getQuery() {
 		return query;
 	}
+
+	@Override
+	public String toString() {
+		return "ConnexionMessage [login=" + login + ", pass=" + pass
+				+ ", query=" + query + ", contenu=" + contenu + "]";
+	}
 	
 	
 }

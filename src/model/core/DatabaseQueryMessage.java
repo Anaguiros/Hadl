@@ -12,4 +12,10 @@ public class DatabaseQueryMessage extends Message {
 	public String getQuery() {
 		return query;
 	}
+
+	@Override
+	public String toString() {
+		return "DatabaseQueryMessage [query=" + query + ", contenu=" + contenu
+				+ "]";
+	}
 }
