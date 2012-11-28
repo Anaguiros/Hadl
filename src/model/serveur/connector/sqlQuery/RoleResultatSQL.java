@@ -1,12 +1,17 @@
 package model.serveur.connector.sqlQuery;
 
 import metaModel.connecteur.composite.RoleCompositeRequis;
+import model.core.DatabaseResultMessage;
 
 public class RoleResultatSQL extends RoleCompositeRequis {
 
 	public RoleResultatSQL(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+	}
+	
+	public void receive(DatabaseResultMessage databaseResultMessage) {
+		this.setChanged();
+		this.notifyObservers(databaseResultMessage);
 	}
 
 }

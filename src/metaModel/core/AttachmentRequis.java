@@ -1,12 +1,11 @@
 package metaModel.core;
 
-import java.util.Observable;
 import java.util.Observer;
 
 import metaModel.composant.composite.PortComposantCompositeRequis;
 import metaModel.connecteur.composite.RoleCompositeFourni;
 
-public class AttachmentRequis implements Observer {
+public abstract class AttachmentRequis implements Observer {
 
 	protected PortComposantCompositeRequis portCompo;
 	protected RoleCompositeFourni role;
@@ -31,9 +30,4 @@ public class AttachmentRequis implements Observer {
 		return role;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {}
-	
-	
-	
 }

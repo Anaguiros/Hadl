@@ -1,6 +1,7 @@
 package model.serveur.database;
 
 import metaModel.composant.composite.ServiceCompositeFourni;
+import model.core.DatabaseResultMessage;
 
 public class ServiceResultatSQL extends ServiceCompositeFourni {
 
@@ -12,12 +13,15 @@ public class ServiceResultatSQL extends ServiceCompositeFourni {
 		String portName = name.replace("Service", "Port");
 		
 		this.portResultatSQL = new PortResultatSQL(portName, this);
-		
 		this.addPort(portName, portResultatSQL);
 	}
 
 	public PortResultatSQL getPortResultatSQL() {
 		return portResultatSQL;
+	}
+
+	public void send(DatabaseResultMessage databaseResultMessage) {
+		((PortResultatSQL) this.portResultatSQL).send(databaseResultMessage);
 	}
 
 }

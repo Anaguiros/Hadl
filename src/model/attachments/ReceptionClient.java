@@ -7,6 +7,7 @@ import metaModel.connecteur.composite.RoleCompositeFourni;
 import metaModel.core.AttachmentRequis;
 import model.client.PortReceptionClient;
 import model.connecteur.RoleReceptionClient;
+import model.core.ResponseMessage;
 
 public class ReceptionClient extends AttachmentRequis {
 
@@ -18,7 +19,7 @@ public class ReceptionClient extends AttachmentRequis {
 	
 	public void update(Observable o, Object object) {
 		if(o instanceof RoleReceptionClient){
-			if(object instanceof AuthResponseMessage){
+			if(object instanceof ResponseMessage){
 				((PortReceptionClient) this.portCompo).receive(object);
 			}
 		}

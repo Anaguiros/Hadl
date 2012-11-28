@@ -1,5 +1,6 @@
 package metaModel.connecteur.composite;
 
+
 public class RoleCompositeRequis extends RoleComposite {
 
 	public RoleCompositeRequis(String name) {
@@ -7,5 +8,5 @@ public class RoleCompositeRequis extends RoleComposite {
 		
 		System.out.println("Role Connector Composite Required Creation : "+name);
 	}
-	
+
 }
