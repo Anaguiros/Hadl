@@ -1,12 +1,17 @@
 package model.serveur.connector.securityQuery;
 
-import metaModel.connecteur.composite.RoleCompositeFourni;
+import metaModel.connecteur.composite.RoleCompositeRequis;
+import model.core.DatabaseResultMessage;
 
-public class RoleResultatSecurity extends RoleCompositeFourni {
+public class RoleResultatSecurity extends RoleCompositeRequis {
 
 	public RoleResultatSecurity(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+	}
+
+	public void receive(DatabaseResultMessage object) {
+		this.setChanged();
+		this.notifyObservers(object);
 	}
 
 }

@@ -5,8 +5,7 @@ import java.util.Observable;
 import metaModel.core.AttachmentFourni;
 import model.client.PortEnvoiClient;
 import model.connecteur.RoleEnvoiClient;
-import model.core.AuthMessage;
-import model.core.ConnexionMessage;
+import model.core.QueryMessage;
 
 public class EnvoiClient extends AttachmentFourni {
 	
@@ -19,7 +18,7 @@ public class EnvoiClient extends AttachmentFourni {
 	
 	public void update(Observable o, Object object){
 		if(o instanceof PortEnvoiClient){
-			if(object instanceof ConnexionMessage){
+			if(object instanceof QueryMessage){
 				((RoleEnvoiClient) this.role).receive(object);
 			}
 		}

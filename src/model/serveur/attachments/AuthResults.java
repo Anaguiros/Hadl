@@ -7,7 +7,7 @@ import metaModel.connecteur.composite.RoleCompositeRequis;
 import metaModel.core.AttachmentFourni;
 import model.core.ResponseMessage;
 import model.serveur.connector.clearanceRequest.RoleAuthResults;
-import model.serveur.connexionManager.PortResultsAuth;
+import model.serveur.securityManager.PortAuthResults;
 
 public class AuthResults extends AttachmentFourni {
 
@@ -18,7 +18,7 @@ public class AuthResults extends AttachmentFourni {
 
 	@Override
 	public void update(Observable o, Object object) {
-		if (o instanceof PortResultsAuth) {
+		if (o instanceof PortAuthResults) {
 			if (object instanceof ResponseMessage) {
 				((RoleAuthResults) this.role).receive((ResponseMessage) object);
 			}

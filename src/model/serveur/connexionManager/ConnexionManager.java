@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import metaModel.composant.composite.ComposantComposite;
 import model.core.AuthMessage;
-import model.core.ConnexionMessage;
+import model.core.QueryMessage;
 import model.core.DatabaseQueryMessage;
 import model.core.DatabaseResultMessage;
 import model.core.ResponseMessage;
@@ -41,9 +41,9 @@ public class ConnexionManager extends ComposantComposite implements Observer {
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ServiceConnexion) {
-			if (object instanceof ConnexionMessage) {
-				ConnexionMessage message = (ConnexionMessage) object;
-				this.serviceRequeteAuth.getPortRequete().send(new AuthMessage(message.getLogin(), message.getPass()));
+			if (object instanceof QueryMessage) {
+				AuthMessage authMessage = this.process((QueryMessage) object);
+				this.serviceRequeteAuth.send(authMessage);
 			}
 			if (object instanceof DatabaseQueryMessage) {
 				this.serviceRequete.getPortRequete().send((DatabaseQueryMessage) object);
@@ -60,9 +60,11 @@ public class ConnexionManager extends ComposantComposite implements Observer {
 			}
 		}
 	}
-
-	public ServiceConnexion getServiceConnexion() {
-		return this.serviceConnexion;
+	
+	public AuthMessage process(QueryMessage queryMessage) {
+		AuthMessage authMessage = new AuthMessage(queryMessage.getLogin(), queryMessage.getPass());
+		System.out.println("Demande d'identification");
+		return authMessage;
 	}
 
 }

@@ -23,7 +23,7 @@ public class Database extends ComposantComposite implements Observer {
 		this.serviceResultatSecurity = new ServiceResultatSecurity("ServiceResultatSecurity");
 		
 		this.serviceRequeteSQL.addObserver(this);
-		this.serviceResultatSecurity.addObserver(this);
+		this.serviceRequeteSecurity.addObserver(this);
 		
 		this.addInterface("ServiceRequeteSQL", this.serviceRequeteSQL);
 		this.addInterface("ServiceResultatSQL", this.serviceResultatSQL);
@@ -39,11 +39,17 @@ public class Database extends ComposantComposite implements Observer {
 				this.serviceResultatSQL.send(databaseResultMessage);
 			}
 		}
+		else if (o instanceof ServiceRequeteSecurity) {
+			if (object instanceof DatabaseQueryMessage) {
+				DatabaseResultMessage databaseResultMessage = this.process((DatabaseQueryMessage) object);
+				this.serviceResultatSecurity.send(databaseResultMessage);
+			}
+		}
 	}
 
 	public DatabaseResultMessage process(DatabaseQueryMessage databaseQueryMessage) {
-		DatabaseResultMessage databaseResultMessage = null;
-		
+		DatabaseResultMessage databaseResultMessage = new DatabaseResultMessage("OK");
+		System.out.println("Database is processing !");
 		return databaseResultMessage;
 	}
 

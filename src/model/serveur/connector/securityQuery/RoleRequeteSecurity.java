@@ -1,12 +1,24 @@
 package model.serveur.connector.securityQuery;
 
-import metaModel.connecteur.composite.RoleCompositeRequis;
+import java.util.Observable;
 
-public class RoleRequeteSecurity extends RoleCompositeRequis {
+import metaModel.connecteur.composite.RoleCompositeFourni;
+import model.core.DatabaseQueryMessage;
+
+public class RoleRequeteSecurity extends RoleCompositeFourni {
 
 	public RoleRequeteSecurity(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void update(Observable o, Object object) {
+		if (o instanceof RoleSecurityComputing) {
+			if (object instanceof DatabaseQueryMessage) {
+				this.setChanged();
+				this.notifyObservers(object);
+			}
+		}
+	}
+	
 }

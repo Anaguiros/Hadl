@@ -13,7 +13,7 @@ public class RoleResultsAuth extends RoleCompositeFourni {
 	
 	@Override
 	public void update(Observable o, Object object) {
-		if (o instanceof RoleResultsAuth) {
+		if (o instanceof RoleAuthResults) {
 			if (object instanceof ResponseMessage) {
 				this.setChanged();
 				this.notifyObservers(object);

@@ -12,11 +12,10 @@ public class ServiceAuthComputing extends ServiceCompositeRequis implements Obse
 	
 	public ServiceAuthComputing(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 		String portName = name.replace("Service", "Port");
 		
 		this.portAuthComputing = new PortAuthComputing(portName, this);
-		
+		this.portAuthComputing.addObserver(this);
 		this.addPort(portName, portAuthComputing);
 	}
 

@@ -1,15 +1,28 @@
 package model.serveur.attachments;
 
-import metaModel.composant.composite.PortComposantCompositeFourni;
-import metaModel.connecteur.composite.RoleCompositeRequis;
-import metaModel.core.AttachmentFourni;
+import java.util.Observable;
 
-public class SecurityResults extends AttachmentFourni {
+import metaModel.composant.composite.PortComposantCompositeRequis;
+import metaModel.connecteur.composite.RoleCompositeFourni;
+import metaModel.core.AttachmentRequis;
+import model.core.DatabaseResultMessage;
+import model.serveur.connector.securityQuery.RoleSecurityResults;
+import model.serveur.securityManager.PortSecurityResults;
 
-	public SecurityResults(PortComposantCompositeFourni portCompo,
-			RoleCompositeRequis role) {
+public class SecurityResults extends AttachmentRequis {
+
+	public SecurityResults(PortComposantCompositeRequis portCompo, RoleCompositeFourni role) {
 		super(portCompo, role);
-		// TODO Auto-generated constructor stub
+		this.role.addObserver(this);
+	}
+
+	@Override
+	public void update(Observable o, Object object) {
+		if (o instanceof RoleSecurityResults) {
+			if (object instanceof DatabaseResultMessage) {
+				((PortSecurityResults) this.portCompo).receive((DatabaseResultMessage) object);
+			}
+		}
 	}
 
 }

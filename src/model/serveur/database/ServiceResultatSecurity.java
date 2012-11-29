@@ -1,14 +1,14 @@
 package model.serveur.database;
 
-import metaModel.composant.composite.ServiceCompositeRequis;
+import metaModel.composant.composite.ServiceCompositeFourni;
+import model.core.DatabaseResultMessage;
 
-public class ServiceResultatSecurity extends ServiceCompositeRequis {
+public class ServiceResultatSecurity extends ServiceCompositeFourni {
 
 	private PortResultatSecurity portResultatSecurity;
 	
 	public ServiceResultatSecurity(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 		String portName = name.replace("Service", "Port");
 		
 		this.portResultatSecurity = new PortResultatSecurity(portName, this);
@@ -18,6 +18,10 @@ public class ServiceResultatSecurity extends ServiceCompositeRequis {
 
 	public PortResultatSecurity getPortResultatSecurity() {
 		return portResultatSecurity;
+	}
+
+	public void send(DatabaseResultMessage databaseResultMessage) {
+		this.portResultatSecurity.send(databaseResultMessage);
 	}
 
 }

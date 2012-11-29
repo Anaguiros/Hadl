@@ -41,6 +41,7 @@ public class ServeurComposant extends ComposantComposite implements Observer {
 	public void update(Observable o, Object object) {
 		if (o instanceof ServiceReceptionServeur){
 			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from Client : " + object);
+			this.execute(object);
 		}
 		else if (o instanceof ServiceConnexionConfigServeur) {
 			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from ServeurConfiguration : " + object);

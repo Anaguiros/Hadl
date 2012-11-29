@@ -1,10 +1,10 @@
 package model.core;
 
-public class ConnexionMessage extends Message {
+public class QueryMessage extends Message {
 
 	private String login, pass, query;
 	
-	public ConnexionMessage(String login, String password, String query){
+	public QueryMessage(String login, String password, String query){
 		this.contenu = DEFAULT_CONTENT;
 		this.login = login;
 		this.pass = password;

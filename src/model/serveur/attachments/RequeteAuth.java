@@ -10,15 +10,16 @@ import model.serveur.connexionManager.PortRequeteAuth;
 
 public class RequeteAuth extends AttachmentFourni implements Observer{
 	
-	public RequeteAuth(PortRequeteAuth portCompo,
-			RoleRequeteAuth role) {
+	public RequeteAuth(PortRequeteAuth portCompo, RoleRequeteAuth role) {
 		super(portCompo, role);
-		// TODO Auto-generated constructor stub
+		this.portCompo.addObserver(this);
 	}
 	
-	public void update(Observable observable, Object object){
-		if(object instanceof PortRequeteAuth){
-			((RoleRequeteAuth) this.role).receive((AuthMessage) object);
+	public void update(Observable o, Object object){
+		if(o instanceof PortRequeteAuth){
+			if (object instanceof AuthMessage) {
+				((RoleRequeteAuth) this.role).receive((AuthMessage) object);
+			}
 		}
 	}
 

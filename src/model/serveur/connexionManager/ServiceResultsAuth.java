@@ -15,7 +15,7 @@ public class ServiceResultsAuth extends ServiceCompositeRequis implements Observ
 		String portName = name.replace("Service", "Port");
 		
 		this.portResultsAuth = new PortResultsAuth(portName, this);
-		
+		this.portResultsAuth.addObserver(this);
 		this.addPort(portName, portResultsAuth);
 	}
 

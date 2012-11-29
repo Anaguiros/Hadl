@@ -1,13 +1,18 @@
 package model.serveur.securityManager;
 
-import metaModel.composant.composite.PortComposantCompositeFourni;
-import metaModel.composant.composite.ServiceCompositeFourni;
+import metaModel.composant.composite.PortComposantCompositeRequis;
+import metaModel.composant.composite.ServiceCompositeRequis;
+import model.core.DatabaseResultMessage;
 
-public class PortSecurityResults extends PortComposantCompositeFourni {
+public class PortSecurityResults extends PortComposantCompositeRequis {
 
-	public PortSecurityResults(String name, ServiceCompositeFourni service) {
+	public PortSecurityResults(String name, ServiceCompositeRequis service) {
 		super(name, service);
-		// TODO Auto-generated constructor stub
+	}
+
+	public void receive(DatabaseResultMessage databaseResultMessage) {
+		this.setChanged();
+		this.notifyObservers(databaseResultMessage);
 	}
 
 }

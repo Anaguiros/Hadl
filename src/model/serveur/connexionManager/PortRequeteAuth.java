@@ -9,4 +9,8 @@ public class PortRequeteAuth extends PortComposantCompositeFourni {
 		super(name, service);
 	}
 
+	public void send(Object object){
+		this.setChanged();
+		this.notifyObservers(object);
+	}
 }

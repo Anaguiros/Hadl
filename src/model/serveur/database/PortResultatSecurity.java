@@ -1,13 +1,19 @@
 package model.serveur.database;
 
-import metaModel.composant.composite.PortComposantCompositeRequis;
-import metaModel.composant.composite.ServiceCompositeRequis;
+import metaModel.composant.composite.PortComposantCompositeFourni;
+import metaModel.composant.composite.ServiceCompositeFourni;
+import model.core.DatabaseResultMessage;
 
-public class PortResultatSecurity extends PortComposantCompositeRequis {
+public class PortResultatSecurity extends PortComposantCompositeFourni {
 
-	public PortResultatSecurity(String name, ServiceCompositeRequis service) {
+	public PortResultatSecurity(String name, ServiceCompositeFourni service) {
 		super(name, service );
 		// TODO Auto-generated constructor stub
+	}
+
+	public void send(DatabaseResultMessage databaseResultMessage) {
+		this.setChanged();
+		this.notifyObservers(databaseResultMessage);
 	}
 
 }

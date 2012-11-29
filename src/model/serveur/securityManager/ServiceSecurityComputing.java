@@ -1,8 +1,9 @@
 package model.serveur.securityManager;
 
-import metaModel.composant.composite.ServiceCompositeRequis;
+import metaModel.composant.composite.ServiceCompositeFourni;
+import model.core.DatabaseQueryMessage;
 
-public class ServiceSecurityComputing extends ServiceCompositeRequis {
+public class ServiceSecurityComputing extends ServiceCompositeFourni {
 
 	public PortSecurityComputing getPortSecurityComputing() {
 		return portSecurityComputing;
@@ -12,12 +13,15 @@ public class ServiceSecurityComputing extends ServiceCompositeRequis {
 	
 	public ServiceSecurityComputing(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 		String portName = name.replace("Service", "Port");
 		
 		this.portSecurityComputing = new PortSecurityComputing(portName, this);
 		
 		this.addPort(portName, portSecurityComputing);
+	}
+	
+	public void send(DatabaseQueryMessage databaseQueryMessage) {
+		this.portSecurityComputing.send(databaseQueryMessage);
 	}
 
 }

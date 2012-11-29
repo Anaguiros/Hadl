@@ -4,23 +4,23 @@ import metaModel.composant.composite.ServiceCompositeFourni;
 
 public class ServiceRequeteAuth extends ServiceCompositeFourni {
 	
-	private PortRequete portRequete;
+	private PortRequeteAuth portRequeteAuth;
 	
 	public ServiceRequeteAuth(String name) {
 		super(name);
 		String portName = name.replace("Service", "Port");
 		
-		this.portRequete = new PortRequete(portName, this);
+		this.portRequeteAuth = new PortRequeteAuth(portName, this);
 		
-		this.addPort(portName, portRequete);
+		this.addPort(portName, portRequeteAuth);
 	}
 
-	public PortRequete getPortRequete() {
-		return portRequete;
+	public PortRequeteAuth getPortRequeteAuth() {
+		return portRequeteAuth;
 	}
 	
 	public void send(Object object){
-		this.portRequete.send(object);
+		this.portRequeteAuth.send(object);
 	}
 
 
