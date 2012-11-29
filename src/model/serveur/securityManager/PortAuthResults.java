@@ -11,6 +11,9 @@ public class PortAuthResults extends PortComposantCompositeFourni {
 	}
 	
 	public void send(ResponseMessage responseMessage) {
+		if (this.countObservers() == 0) {
+			System.out.println(" x | " + this.getClass().getSimpleName() + "     | Arret de la propagation de l'objet : aucun attachement");
+		}
 		this.setChanged();
 		this.notifyObservers(responseMessage);
 	}

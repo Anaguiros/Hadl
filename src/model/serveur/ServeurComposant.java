@@ -26,25 +26,28 @@ public class ServeurComposant extends ComposantComposite implements Observer {
 	}
 	
 	public void send(Object message){
-		System.out.println(" o | " + this.getClass().getSimpleName() + "     | Envoi Serveur : " + message);
+		System.out.println(" o | " + this.getClass().getSimpleName() + "     | \tTransfert de la reponse");
 		ServiceEnvoiServeur serv = (ServiceEnvoiServeur)(this.getInterface("ServiceEnvoiServeur"));
+		System.out.println("<- | " + this.getClass().getSimpleName() + "     | Send to Client : " + message);
 		serv.send(message);
 	}
 	
 	public void execute(Object object) {
-		System.out.println(" o | " + this.getClass().getSimpleName() + "     | Send to ServeurConfiguration : " + object);
+		System.out.println(" o | " + this.getClass().getSimpleName() + "     | \tTransfert de la requete");
 		ServiceConnexionConfigServeur serv = (ServiceConnexionConfigServeur)(this.getInterface("ServiceConnexionConfigServeur"));
+		System.out.println("<- | " + this.getClass().getSimpleName() + "     | Send to ServeurConfiguration : " + object);
 		serv.send(object);
 	}
 
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ServiceReceptionServeur){
-			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from Client : " + object);
+			System.out.println("-> | " + this.getClass().getSimpleName() + "     | Reception from Client : " + object);
 			this.execute(object);
 		}
 		else if (o instanceof ServiceConnexionConfigServeur) {
-			System.out.println(" o | " + this.getClass().getSimpleName() + "     | Reception from ServeurConfiguration : " + object);
+			System.out.println("-> | " + this.getClass().getSimpleName() + "     | Reception from ServeurConfiguration : " + object);
+			this.send(object);
 		}
 	}
 

@@ -14,6 +14,7 @@ public class Resultat extends AttachmentRequis implements Observer {
 
 	public Resultat(PortComposantCompositeRequis portCompo, RoleCompositeFourni role) {
 		super(portCompo, role);
+		this.role.addObserver(this);
 	}
 	
 	public void update(Observable o, Object object) {

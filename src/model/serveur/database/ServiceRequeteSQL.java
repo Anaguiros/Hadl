@@ -26,7 +26,7 @@ public class ServiceRequeteSQL extends ServiceCompositeRequis implements Observe
 
 	@Override
 	public void update(Observable o, Object object) {
-		if (o instanceof PortResultatSQL) {
+		if (o instanceof PortRequeteSQL) {
 			if (object instanceof DatabaseQueryMessage) {
 				this.setChanged();
 				this.notifyObservers(object);

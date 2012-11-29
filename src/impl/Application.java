@@ -195,12 +195,28 @@ public class Application {
 		sq.glue();
 		sqlq.glue();
 		
+		database.addUser("kevin", "kevin");
+		database.addData("Year", "2012");
+		database.addData("Month", "November");
+		database.addData("Day", "Friday 30");
+		database.addUser("matthieu", "matthieu");
+		
 		System.out.println("\n##### Envois #####");
-		System.out.println("-----------------------------------------------------------------------------------");
-		System.out.println("   | Class                | Details");
-		System.out.println("-----------------------------------------------------------------------------------");
-		client.send(new QueryMessage("toto", "tutu", "SELECT * FROM *"));
-		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("   | Classe                | Details");
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("   |                       | Test de requete avec utilisateur et mot de passe valide");
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		client.send(new QueryMessage("kevin", "kevin", "SELECT * FROM datas"));
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("   |                       | Test de requete avec utilisateur invalide");
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		client.send(new QueryMessage("toto", "toto", "SELECT * FROM datas"));
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("   |                       | Test de requete avec mot de passe invalide");
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		client.send(new QueryMessage("matthieu", "kevin", "SELECT * FROM datas"));
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 		
 	}
 }

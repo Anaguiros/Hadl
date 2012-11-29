@@ -13,6 +13,9 @@ public class RoleResultat extends RoleCompositeFourni implements Observer {
 
 	public void update(Observable o, Object object) {
 		if (o instanceof RoleResultatSQL) {
+			if (this.countObservers() == 0) {
+				System.out.println(" x | " + this.getClass().getSimpleName() + "     | Arret de la propagation de l'objet : aucun attachement");
+			}
 			this.setChanged();
 			this.notifyObservers(object);
 		}

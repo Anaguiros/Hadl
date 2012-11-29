@@ -15,6 +15,9 @@ public class RoleSecurityResults extends RoleCompositeFourni {
 	public void update(Observable o, Object object) {
 		if (o instanceof RoleResultatSecurity) {
 			if (object instanceof DatabaseResultMessage) {
+				if (this.countObservers() == 0) {
+					System.out.println(" x | " + this.getClass().getSimpleName() + "     | Arret de la propagation de l'objet : aucun attachement");
+				}
 				this.setChanged();
 				this.notifyObservers(object);
 			}

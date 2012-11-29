@@ -13,10 +13,7 @@ public class RoleReceptionClient extends RoleCompositeFourni {
 	@Override
 	public void update(Observable o, Object object) {
 		if (this.countObservers() == 0) {
-			System.out.println(" x | " + this.getClass().getSimpleName() + "  | Arrêt de la propagation de l'objet : aucun attachement");
-		}
-		else {
-			System.out.println(" o | " + this.getClass().getSimpleName() + "  | RPC Serveur -> " + this.countObservers() + " Client : " + object);
+			System.out.println(" x | " + this.getClass().getSimpleName() + "  | Arret de la propagation de l'objet : aucun attachement");
 		}
 		this.setChanged();
 		this.notifyObservers(object);

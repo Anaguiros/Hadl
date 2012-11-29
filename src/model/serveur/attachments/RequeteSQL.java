@@ -13,6 +13,7 @@ public class RequeteSQL extends AttachmentRequis {
 
 	public RequeteSQL(PortComposantCompositeRequis portCompo, RoleCompositeFourni role) {
 		super(portCompo, role);
+		this.role.addObserver(this);
 	}
 
 	@Override

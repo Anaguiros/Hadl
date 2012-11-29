@@ -13,6 +13,7 @@ public class Requete extends AttachmentFourni {
 
 	public Requete(PortComposantCompositeFourni portCompo, RoleCompositeRequis role) {
 		super(portCompo, role);
+		this.portCompo.addObserver(this);
 	}
 
 	@Override

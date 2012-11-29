@@ -4,11 +4,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 import metaModel.composant.composite.ComposantComposite;
+import model.core.AuthGrantedMessage;
 import model.core.AuthMessage;
+import model.core.ErrorAuthMessage;
 import model.core.QueryMessage;
 import model.core.DatabaseQueryMessage;
 import model.core.DatabaseResultMessage;
-import model.core.ResponseMessage;
 
 public class ConnexionManager extends ComposantComposite implements Observer {
 	
@@ -17,6 +18,8 @@ public class ConnexionManager extends ComposantComposite implements Observer {
 	private ServiceRequete serviceRequete;
 	private ServiceResultsAuth serviceResultsAuth;
 	private ServiceRequeteAuth serviceRequeteAuth;
+	
+	private QueryMessage queryMessage;
 
 	public ConnexionManager(String name) {
 		super(name);
@@ -41,21 +44,31 @@ public class ConnexionManager extends ComposantComposite implements Observer {
 	@Override
 	public void update(Observable o, Object object) {
 		if (o instanceof ServiceConnexion) {
+			System.out.println("-> | " + this.getClass().getSimpleName() + "     | Reception from ServeurConfiguration : " + object);
 			if (object instanceof QueryMessage) {
 				AuthMessage authMessage = this.process((QueryMessage) object);
+				System.out.println("<- | " + this.getClass().getSimpleName() + "     | Send to SecurityManager : " + authMessage);
 				this.serviceRequeteAuth.send(authMessage);
-			}
-			if (object instanceof DatabaseQueryMessage) {
-				this.serviceRequete.getPortRequete().send((DatabaseQueryMessage) object);
 			}
 		}
 		else if (o instanceof ServiceResultat) {
+			System.out.println("-> | " + this.getClass().getSimpleName() + "     | Reception from Database : " + object);
 			if (object instanceof DatabaseResultMessage) {
+				System.out.println(" o | " + this.getClass().getSimpleName() + "     | \tEnvoi de la reponse au serveur");
+				System.out.println("<- | " + this.getClass().getSimpleName() + "     | Send to ServeurConfiguration : " + object);
 				this.serviceConnexion.getPortConnexion().send(this.serviceConnexion, object);
 			}
 		}
 		else if (o instanceof ServiceResultsAuth) {
-			if (object instanceof ResponseMessage) {
+			System.out.println("-> | " + this.getClass().getSimpleName() + "     | Reception from SecurityManager : " + object);
+			if (object instanceof AuthGrantedMessage) {
+				DatabaseQueryMessage databaseQueryMessage = this.process((AuthGrantedMessage) object);
+				System.out.println("<- | " + this.getClass().getSimpleName() + "     | Send to Database : " + databaseQueryMessage);
+				this.serviceRequete.getPortRequete().send(databaseQueryMessage);
+			}
+			else if (object instanceof ErrorAuthMessage) {
+				System.out.println(" o | " + this.getClass().getSimpleName() + "     | \tTransfert de la reponse");
+				System.out.println("<- | " + this.getClass().getSimpleName() + "     | Send to ServeurConfiguration : " + object);
 				this.serviceConnexion.getPortConnexion().send(this.serviceConnexion, object);
 			}
 		}
@@ -63,8 +76,15 @@ public class ConnexionManager extends ComposantComposite implements Observer {
 	
 	public AuthMessage process(QueryMessage queryMessage) {
 		AuthMessage authMessage = new AuthMessage(queryMessage.getLogin(), queryMessage.getPass());
-		System.out.println("Demande d'identification");
+		this.queryMessage = queryMessage;
+		System.out.println(" o | " + this.getClass().getSimpleName() + "     | \tDemande d'authentification");
 		return authMessage;
+	}
+	
+	public DatabaseQueryMessage process(AuthGrantedMessage queryMessage) {
+		DatabaseQueryMessage databaseQueryMessage = new DatabaseQueryMessage(this.queryMessage.getQuery());
+		System.out.println(" o | " + this.getClass().getSimpleName() + "     | \tEnvoi de la requete a la base de donnees !");
+		return databaseQueryMessage;
 	}
 
 	public ServiceConnexion getServiceConnexion() {
