@@ -67,4 +67,8 @@ public class ConnexionManager extends ComposantComposite implements Observer {
 		return authMessage;
 	}
 
+	public ServiceConnexion getServiceConnexion() {
+		return this.serviceConnexion;
+	}
+
 }
