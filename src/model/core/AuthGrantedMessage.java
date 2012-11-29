@@ -1,6 +1,6 @@
 package model.core;
 
-public class AuthGrantedMessage extends Message {
+public class AuthGrantedMessage extends ResponseMessage {
 
 	private String credentials;
 	

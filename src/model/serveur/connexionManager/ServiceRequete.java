@@ -1,6 +1,7 @@
 package model.serveur.connexionManager;
 
 import metaModel.composant.composite.ServiceCompositeFourni;
+import model.core.DatabaseQueryMessage;
 
 public class ServiceRequete extends ServiceCompositeFourni {
 	
@@ -19,4 +20,7 @@ public class ServiceRequete extends ServiceCompositeFourni {
 		return portRequete;
 	}
 
+	public void send(DatabaseQueryMessage databaseQueryMessage) {
+		this.portRequete.send(databaseQueryMessage);
+	}
 }

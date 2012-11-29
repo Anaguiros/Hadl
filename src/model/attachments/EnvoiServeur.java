@@ -6,8 +6,7 @@ import metaModel.composant.composite.PortComposantCompositeFourni;
 import metaModel.connecteur.composite.RoleCompositeRequis;
 import metaModel.core.AttachmentFourni;
 import model.connecteur.RoleEnvoiServeur;
-import model.core.DatabaseResultMessage;
-import model.core.ErrorAuthMessage;
+import model.core.ResponseMessage;
 import model.serveur.PortEnvoiServeur;
 
 public class EnvoiServeur extends AttachmentFourni {
@@ -20,7 +19,7 @@ public class EnvoiServeur extends AttachmentFourni {
 
 	public void update(Observable o, Object object){
 		if(o instanceof PortEnvoiServeur){
-			if((object instanceof AuthResponseMessage)){
+			if((object instanceof ResponseMessage)){
 				((RoleEnvoiServeur) this.role).receive(object);
 			}
 		}

@@ -1,8 +1,12 @@
 package model.serveur.securityManager;
 
-import metaModel.composant.composite.ServiceCompositeRequis;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ServiceAuthComputing extends ServiceCompositeRequis {
+import metaModel.composant.composite.ServiceCompositeRequis;
+import model.core.AuthMessage;
+
+public class ServiceAuthComputing extends ServiceCompositeRequis implements Observer {
 
 	private PortAuthComputing portAuthComputing;
 	
@@ -19,5 +23,17 @@ public class ServiceAuthComputing extends ServiceCompositeRequis {
 	public PortAuthComputing getPortAuthComputing() {
 		return portAuthComputing;
 	}
+
+	@Override
+	public void update(Observable o, Object object) {
+		if (o instanceof PortAuthComputing) {
+			if (object instanceof AuthMessage) {
+				this.setChanged();
+				this.notifyObservers(object);
+			}
+		}
+	}
+	
+	
 
 }

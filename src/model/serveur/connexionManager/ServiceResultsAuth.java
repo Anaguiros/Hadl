@@ -1,8 +1,12 @@
 package model.serveur.connexionManager;
 
-import metaModel.composant.composite.ServiceCompositeRequis;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ServiceResultsAuth extends ServiceCompositeRequis {
+import metaModel.composant.composite.ServiceCompositeRequis;
+import model.core.ResponseMessage;
+
+public class ServiceResultsAuth extends ServiceCompositeRequis implements Observer {
 	
 	private PortResultsAuth portResultsAuth;
 	
@@ -18,5 +22,17 @@ public class ServiceResultsAuth extends ServiceCompositeRequis {
 	public PortResultsAuth getPortResultsAuth() {
 		return portResultsAuth;
 	}
+
+	@Override
+	public void update(Observable o, Object object) {
+		if (o instanceof PortResultsAuth) {
+			if (object instanceof ResponseMessage) {
+				this.setChanged();
+				this.notifyObservers(object);
+			}
+		}
+	}
+	
+	
 
 }

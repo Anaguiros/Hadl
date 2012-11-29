@@ -11,7 +11,6 @@ public class ClearanceRequest extends ConnecteurComposite {
 	
 	public ClearanceRequest(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 		
 		this.roleAuthComputing = new RoleAuthComputing("RoleAuthComputing");
 		this.roleAuthResults = new RoleAuthResults("RoleAuthResults");
@@ -29,22 +28,6 @@ public class ClearanceRequest extends ConnecteurComposite {
 		this.roleRequeteAuth.addObserver(this.roleAuthComputing);
 		System.out.println("\tLink RoleAuthResults <-> RoleResultsAuth");
 		this.roleAuthResults.addObserver(this.roleResultsAuth);
-	}
-
-	public RoleRequeteAuth getRoleRequeteAuth() {
-		return roleRequeteAuth;
-	}
-
-	public RoleResultsAuth getRoleResultsAuth() {
-		return roleResultsAuth;
-	}
-
-	public RoleAuthComputing getRoleAuthComputing() {
-		return roleAuthComputing;
-	}
-
-	public RoleAuthResults getRoleAuthResults() {
-		return roleAuthResults;
 	}
 
 }

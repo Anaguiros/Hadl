@@ -1,6 +1,6 @@
 package model.core;
 
-public class ErrorAuthMessage extends Message {
+public class ErrorAuthMessage extends ResponseMessage {
 
 	private String error;
 	

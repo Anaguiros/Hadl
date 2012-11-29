@@ -1,6 +1,7 @@
 package model.serveur.securityManager;
 
 import metaModel.composant.composite.ServiceCompositeFourni;
+import model.core.ResponseMessage;
 
 public class ServiceAuthResults extends ServiceCompositeFourni {
 
@@ -18,6 +19,10 @@ public class ServiceAuthResults extends ServiceCompositeFourni {
 
 	public PortAuthResults getPortAuthResults() {
 		return portAuthResults;
+	}
+
+	public void send(ResponseMessage responseMessage) {
+		((PortAuthResults) this.portAuthResults).send(responseMessage);
 	}
 
 }

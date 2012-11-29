@@ -1,6 +1,6 @@
 package model.core;
 
-public class DatabaseResultMessage extends Message {
+public class DatabaseResultMessage extends ResponseMessage {
 
 	private String result;
 	

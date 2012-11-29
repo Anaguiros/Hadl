@@ -4,14 +4,28 @@ import metaModel.connecteur.composite.ConnecteurComposite;
 
 public class SQLQuery extends ConnecteurComposite {
 
+	private RoleResultat roleResultat;
+	private RoleRequete roleRequete;
+	private RoleRequeteSQL roleRequeteSQL;
+	private RoleResultatSQL roleResultatSQL;
+	
 	public SQLQuery(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 		
-		this.addInterfaceConnecteurComposite(new RoleResultat("RoleResultat"));
-		this.addInterfaceConnecteurComposite(new RoleRequete("RoleRequete"));
-		this.addInterfaceConnecteurComposite(new RoleRequeteSQL("RoleRequeteSQL"));
-		this.addInterfaceConnecteurComposite(new RoleResultatSQL("RoleResultatSQL"));
+		this.roleResultat = new RoleResultat("RoleResultat");
+		this.roleRequete = new RoleRequete("RoleRequete");
+		this.roleRequeteSQL = new RoleRequeteSQL("RoleRequeteSQL");
+		this.roleResultatSQL = new RoleResultatSQL("RoleResultatSQL");
+		
+		this.addInterfaceConnecteurComposite(roleResultat);
+		this.addInterfaceConnecteurComposite(roleRequete);
+		this.addInterfaceConnecteurComposite(roleRequeteSQL);
+		this.addInterfaceConnecteurComposite(roleResultatSQL);
 	}
 
+	public void glue() {
+		this.roleResultatSQL.addObserver(this.roleResultat);
+		this.roleRequete.addObserver(this.roleRequeteSQL);
+		
+	}
 }
